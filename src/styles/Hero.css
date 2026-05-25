@@ -1,0 +1,64 @@
+.hero {
+  min-height: calc(100vh - 70px);
+  background-color: #fdf6ee;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 60px 80px;
+  gap: 60px;
+}
+
+.hero-content {
+  flex: 1;
+  min-width: 280px;
+  max-width: 500px;
+}
+
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 3.8rem;
+  font-weight: 700;
+  color: #3b1a08;
+  line-height: 1.15;
+  margin-bottom: 20px;
+}
+
+.hero-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: #7a5c3e;
+  margin-bottom: 36px;
+  line-height: 1.7;
+  max-width: 380px;
+}
+
+.hero-btn {
+  display: inline-block;
+  background-color: #c0392b;
+  color: white;
+  padding: 13px 30px;
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: opacity 0.2s;
+}
+
+.hero-btn:hover {
+  opacity: 0.88;
+}
+
+.hero-image {
+  flex: 1;
+  min-width: 280px;
+  max-width: 560px;
+}
+
+.hero-image img {
+  width: 100%;
+  height: 480px;
+  border-radius: 12px;
+  object-fit: cover;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+}
