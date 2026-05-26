@@ -5,6 +5,7 @@ import Products from './components/Products'
 import Gallery from './components/Gallery'
 import Faq from './components/Faq'
 import Contact from './components/Contact'
+import Footer from './components/Footer'
 
 function App() {
   return (
@@ -16,6 +17,7 @@ function App() {
       <Gallery />
       <Faq />
       <Contact />
+      <Footer />
     </>
   );
 }

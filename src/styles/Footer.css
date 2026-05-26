@@ -1,0 +1,119 @@
+.footer {
+  background-color: #3b1a08;
+  color: #f5e6d3;
+  padding: 60px 80px 0;
+}
+
+.footer-body {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+/* Brand */
+.footer-brand {
+  flex: 2;
+  min-width: 220px;
+}
+
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 1.6rem;
+  color: #fff;
+  margin-bottom: 14px;
+}
+
+.footer-desc {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.85rem;
+  color: #c9a880;
+  line-height: 1.7;
+  max-width: 280px;
+}
+
+/* Navegación */
+.footer-nav {
+  flex: 1;
+  min-width: 140px;
+}
+
+.footer-nav-title {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #fff;
+  letter-spacing: 2px;
+  margin-bottom: 16px;
+}
+
+.footer-nav ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.footer-nav ul li a {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  color: #c9a880;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.footer-nav ul li a:hover {
+  color: #fff;
+}
+
+/* Redes */
+.footer-social {
+  flex: 1;
+  min-width: 120px;
+}
+
+.footer-social-icons {
+  display: flex;
+  gap: 12px;
+  margin-top: 4px;
+}
+
+.footer-social-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.1);
+  color: #fff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 700;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: background-color 0.2s;
+}
+
+.footer-social-btn:hover {
+  background-color: #c0392b;
+}
+
+/* Copyright */
+.footer-bottom {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 20px 0;
+  text-align: center;
+}
+
+.footer-bottom p {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  color: #c9a880;
+  margin: 0;
+}
