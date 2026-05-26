@@ -64,7 +64,7 @@ function Contact() {
           <h3>Encuéntranos</h3>
           <iframe
             title="Ubicación Galletas Juanita"
-            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3757.0!2d-98.9!3d19.7!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zMTnCsDQyJzAwLjAiTiA5OMKwNTQnMDAuMCJX!5e0!3m2!1ses!2smx!4v1600000000000!5m2!1ses!2smx"
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3757.5!2d-98.9167!3d19.7167!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x85d1f3b3b3b3b3b3%3A0x0!2sCalle+Maestros+10%2C+San+Pedro+Atzompa%2C+Tec%C3%A1mac!5e0!3m2!1ses-419!2smx!4v1700000000000!5m2!1ses-419!2smx"
             width="100%"
             height="260"
             style={{ border: 0, borderRadius: '12px' }}
