@@ -1,0 +1,108 @@
+.allies {
+  background-color: #3b1a08;
+  padding: 70px 0 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 40px;
+  overflow: hidden;
+}
+
+.allies-header {
+  text-align: center;
+  padding: 0 24px;
+}
+
+.allies-label {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #c9a84c;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.allies-title {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #fff;
+  margin: 10px 0 12px;
+}
+
+.allies-underline {
+  width: 50px;
+  height: 3px;
+  background-color: #c0392b;
+  margin: 0 auto 16px;
+}
+
+.allies-subtitle {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.95rem;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+/* Marquee */
+.allies-marquee-wrapper {
+  width: 100%;
+  overflow: hidden;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
+}
+
+.allies-marquee {
+  display: flex;
+  gap: 24px;
+  width: max-content;
+  animation: marquee 20s linear infinite;
+  padding: 10px 0;
+}
+
+.allies-marquee:hover {
+  animation-play-state: paused;
+}
+
+.ally-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: 16px;
+  padding: 22px 36px;
+  min-width: 160px;
+  text-decoration: none;
+  transition: all 0.25s;
+  cursor: pointer;
+}
+
+.ally-item:hover {
+  background-color: rgba(192, 57, 43, 0.35);
+  border-color: #c0392b;
+  transform: translateY(-5px);
+  box-shadow: 0 8px 24px rgba(192, 57, 43, 0.3);
+}
+
+.ally-emoji {
+  font-size: 2.2rem;
+}
+
+.ally-name {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: rgba(255, 255, 255, 0.85);
+  text-align: center;
+  white-space: nowrap;
+}
+
+@keyframes marquee {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+@media (max-width: 768px) {
+  .allies-title { font-size: 1.8rem; }
+}

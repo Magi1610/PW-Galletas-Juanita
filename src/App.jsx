@@ -6,6 +6,8 @@ import Gallery from './components/Gallery'
 import Faq from './components/Faq'
 import Contact from './components/Contact'
 import Footer from './components/Footer'
+import Allies from './components/Allies'
+import WhatsAppButton from './components/WhatsAppButton'
 
 function App() {
   return (
@@ -15,6 +17,7 @@ function App() {
       <Products />
       <About />
       <Gallery />
+      <Allies />
       <Faq />
       <Contact />
       <Footer />
