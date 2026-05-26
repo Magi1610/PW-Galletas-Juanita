@@ -1,12 +1,12 @@
 import '../styles/Navbar.css'
+import logo from '../assets/images/logo.png'
 
 function Navbar() {
   return (
     <nav className="navbar">
 
       <div className="navbar-logo">
-        <span className="navbar-logo-icon">🍪</span>
-        <h1>Galletas Juanita</h1>
+        <img src={logo} alt="Galletas Juanita" className="navbar-logo-img" />
       </div>
 
       <ul className="navbar-links">

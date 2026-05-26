@@ -10,6 +10,12 @@
   box-shadow: 0 2px 12px rgba(0, 0, 0, 0.07);
 }
 
+.navbar-logo-img {
+  height: 55px;
+  width: auto;
+  object-fit: contain;
+}
+
 /* Logo */
 .navbar-logo {
   display: flex;
