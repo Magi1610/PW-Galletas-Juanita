@@ -140,3 +140,22 @@
   color: #3b1a08;
   margin-bottom: 16px;
 }
+
+@media (max-width: 768px) {
+  .contact {
+    padding: 50px 24px;
+  }
+
+  .contact-title {
+    font-size: 2rem;
+  }
+
+  .contact-body {
+    flex-direction: column;
+  }
+
+  .contact-btn {
+    width: 100%;
+    text-align: center;
+  }
+}

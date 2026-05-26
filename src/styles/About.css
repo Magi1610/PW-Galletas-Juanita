@@ -76,3 +76,23 @@
 .about-btn:hover {
   opacity: 0.88;
 }
+
+@media (max-width: 768px) {
+  .about {
+    flex-direction: column;
+    padding: 50px 24px;
+    text-align: center;
+  }
+
+  .about-title {
+    font-size: 2rem;
+  }
+
+  .about-underline {
+    margin: 0 auto 20px;
+  }
+
+  .about-image img {
+    height: 280px;
+  }
+}

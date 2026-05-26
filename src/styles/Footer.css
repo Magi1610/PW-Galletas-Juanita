@@ -117,3 +117,18 @@
   color: #c9a880;
   margin: 0;
 }
+
+@media (max-width: 768px) {
+  .footer {
+    padding: 40px 24px 0;
+  }
+
+  .footer-body {
+    flex-direction: column;
+    gap: 30px;
+  }
+
+  .footer-desc {
+    max-width: 100%;
+  }
+}

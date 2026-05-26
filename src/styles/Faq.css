@@ -95,3 +95,18 @@
 .faq-answer p {
   margin: 16px 0 0;
 }
+
+@media (max-width: 768px) {
+  .faq {
+    padding: 50px 24px;
+  }
+
+  .faq-title {
+    font-size: 2rem;
+  }
+
+  .faq-question {
+    font-size: 0.88rem;
+    padding: 16px 18px;
+  }
+}

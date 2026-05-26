@@ -112,3 +112,22 @@
   background-color: #c0392b;
   color: white;
 }
+
+@media (max-width: 768px) {
+  .products {
+    padding: 50px 24px;
+  }
+
+  .products-title {
+    font-size: 2rem;
+  }
+
+  .product-card {
+    width: 140px;
+  }
+
+  .product-img-wrapper {
+    width: 90px;
+    height: 90px;
+  }
+}

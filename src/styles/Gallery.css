@@ -84,3 +84,18 @@
   background-color: #c0392b;
   color: white;
 }
+
+@media (max-width: 768px) {
+  .gallery {
+    padding: 50px 24px;
+  }
+
+  .gallery-title {
+    font-size: 2rem;
+  }
+
+  .gallery-item {
+    min-width: 140px;
+    height: 130px;
+  }
+}
