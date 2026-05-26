@@ -1,6 +1,6 @@
 .hero {
   min-height: calc(100vh - 70px);
-  background-color: #fdf6ee;
+  background: linear-gradient(135deg, #fdf6ee 60%, #fce8d8 100%);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,6 +12,20 @@
   flex: 1;
   min-width: 280px;
   max-width: 500px;
+  animation: fadeInLeft 0.8s ease forwards;
+}
+
+.hero-badge {
+  display: inline-block;
+  background-color: #c0392b;
+  color: white;
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 6px 16px;
+  border-radius: 999px;
+  margin-bottom: 20px;
+  letter-spacing: 1px;
 }
 
 .hero-title {
@@ -32,6 +46,12 @@
   max-width: 380px;
 }
 
+.hero-buttons {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
 .hero-btn {
   display: inline-block;
   background-color: #c0392b;
@@ -42,17 +62,40 @@
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
-  transition: opacity 0.2s;
+  transition: all 0.2s;
+  box-shadow: 0 4px 15px rgba(192, 57, 43, 0.35);
 }
 
 .hero-btn:hover {
-  opacity: 0.88;
+  background-color: #a93226;
+  transform: translateY(-2px);
+  box-shadow: 0 6px 20px rgba(192, 57, 43, 0.45);
+}
+
+.hero-btn-outline {
+  display: inline-block;
+  border: 2px solid #c0392b;
+  color: #c0392b;
+  padding: 11px 28px;
+  border-radius: 999px;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 600;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.2s;
+}
+
+.hero-btn-outline:hover {
+  background-color: #c0392b;
+  color: white;
+  transform: translateY(-2px);
 }
 
 .hero-image {
   flex: 1;
   min-width: 280px;
   max-width: 560px;
+  animation: fadeInRight 0.8s ease forwards;
 }
 
 .hero-image img {
@@ -60,7 +103,17 @@
   height: 480px;
   border-radius: 12px;
   object-fit: cover;
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 16px 50px rgba(0, 0, 0, 0.15);
+}
+
+@keyframes fadeInLeft {
+  from { opacity: 0; transform: translateX(-30px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes fadeInRight {
+  from { opacity: 0; transform: translateX(30px); }
+  to   { opacity: 1; transform: translateX(0); }
 }
 
 @media (max-width: 768px) {
@@ -69,16 +122,8 @@
     padding: 40px 24px;
     text-align: center;
   }
-
-  .hero-title {
-    font-size: 2.4rem;
-  }
-
-  .hero-subtitle {
-    max-width: 100%;
-  }
-
-  .hero-image img {
-    height: 280px;
-  }
+  .hero-title { font-size: 2.4rem; }
+  .hero-subtitle { max-width: 100%; }
+  .hero-image img { height: 280px; }
+  .hero-buttons { justify-content: center; }
 }
