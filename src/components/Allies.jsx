@@ -1,11 +1,16 @@
 ﻿import "../styles/Allies.css"
+import logoGuna from "../assets/images/guna.png"
+import logoHS from "../assets/images/hs-comercial.png"
+import logoSaredy from "../assets/images/saredy.jpg"
+import logoCravioto from "../assets/images/cravioto.png"
+import logoGaris from "../assets/images/garis.jpg"
 
 const allies = [
-  { id: 1, name: "Guna", emoji: "🏢", url: "https://guna.com.mx/" },
-  { id: 2, name: "HS Comercial", emoji: "🏪", url: "https://hscomercial.mx/" },
-  { id: 3, name: "Grupo Saredy", emoji: "🛒", url: "https://gruposaredy.com/" },
-  { id: 4, name: "Dulces Cravioto", emoji: "🍬", url: "https://www.facebook.com/DulcesCraviotoOficial/" },
-  { id: 5, name: "Garis", emoji: "🏬", url: "https://www.garis.com.mx/home/inicio.html" },
+  { id: 1, name: "Guna",            url: "https://guna.com.mx/",                                  logo: logoGuna },
+  { id: 2, name: "HS Comercial",    url: "https://hscomercial.mx/",                               logo: logoHS },
+  { id: 3, name: "Grupo Saredy",    url: "https://gruposaredy.com/",                              logo: logoSaredy },
+  { id: 4, name: "Dulces Cravioto", url: "https://www.facebook.com/DulcesCraviotoOficial/",      logo: logoCravioto },
+  { id: 5, name: "Garis",           url: "https://www.garis.com.mx/home/inicio.html",            logo: logoGaris },
 ]
 
 const alliesDup = [...allies, ...allies]
@@ -25,7 +30,9 @@ function Allies() {
         <div className="allies-marquee">
           {alliesDup.map((ally, i) => (
             <a key={i} href={ally.url} target="_blank" rel="noopener noreferrer" className="ally-item">
-              <span className="ally-emoji">{ally.emoji}</span>
+              <div className="ally-logo-wrapper">
+                <img src={ally.logo} alt={ally.name} className="ally-logo" />
+              </div>
               <span className="ally-name">{ally.name}</span>
             </a>
           ))}

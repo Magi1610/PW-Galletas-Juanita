@@ -21,6 +21,7 @@ function App() {
       <Faq />
       <Contact />
       <Footer />
+      <WhatsAppButton />
     </>
   );
 }
