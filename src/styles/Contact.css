@@ -159,3 +159,31 @@
     text-align: center;
   }
 }
+
+.contact-msg {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  padding: 10px 16px;
+  border-radius: 8px;
+  margin: 0;
+}
+
+.contact-msg.success {
+  background-color: #d4edda;
+  color: #155724;
+}
+
+.contact-msg.error {
+  background-color: #f8d7da;
+  color: #721c24;
+}
+
+.contact-msg.sending {
+  background-color: #fff3cd;
+  color: #856404;
+}
+
+.contact-btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
