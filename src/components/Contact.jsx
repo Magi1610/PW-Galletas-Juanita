@@ -2,9 +2,9 @@
 import emailjs from "@emailjs/browser"
 import "../styles/Contact.css"
 
-const SERVICE_ID  = "TU_SERVICE_ID"
-const TEMPLATE_ID = "TU_TEMPLATE_ID"
-const PUBLIC_KEY  = "TU_PUBLIC_KEY"
+const SERVICE_ID  = "service_bpshxh6"
+const TEMPLATE_ID = "template_o2uu1om"
+const PUBLIC_KEY  = "ZO1IFKOO1drMeGQ_j"
 
 function Contact() {
   const [form, setForm] = useState({ nombre: "", email: "", telefono: "", mensaje: "" })
