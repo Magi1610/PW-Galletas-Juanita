@@ -5,7 +5,7 @@ function Hero() {
   return (
     <section id="inicio" className="hero">
       <div className="hero-content">
-        <div className="hero-badge">⭐ Tradición desde 1990</div>
+        <div className="hero-badge">Tradición desde 1990</div>
         <h1 className="hero-title">
           Pruebe lo nuestro,{' '}
           <span className="hero-animated-text">

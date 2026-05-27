@@ -60,12 +60,12 @@
   left: 0;
   width: 0;
   height: 2px;
-  background-color: #c0392b;
+  background-color: #d50a0d;
   transition: width 0.2s;
 }
 
 .navbar-links li a:hover {
-  color: #c0392b;
+  color: #d50a0d;
 }
 
 .navbar-links li a:hover::after {

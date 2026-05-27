@@ -15,6 +15,7 @@ function Navbar() {
         <li><a href="#productos">Productos</a></li>
         <li><a href="#galeria">Galería</a></li>
         <li><a href="#faq">FAQ</a></li>
+        <li><a href="#aliados">Clientes</a></li>
       </ul>
 
       <a href="#contacto" className="navbar-cta">Contáctanos</a>
