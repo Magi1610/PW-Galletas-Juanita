@@ -12,7 +12,7 @@
   overflow: visible;
 }
 
-/* Logo que sobresale */
+/* ── Logo ── */
 .navbar-logo-wrapper {
   position: relative;
   height: 70px;
@@ -26,7 +26,7 @@
   width: auto;
   object-fit: contain;
   margin-top: 30px;
-  filter: drop-shadow(0 4px 8px rgba(0,0,0,0.15));
+  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.15));
   transition: transform 0.2s;
 }
 
@@ -34,7 +34,7 @@
   transform: scale(1.05);
 }
 
-/* Links */
+/* ── Links (a y button comparten todo) ── */
 .navbar-links {
   display: flex;
   gap: 32px;
@@ -43,17 +43,25 @@
   padding: 0;
 }
 
-.navbar-links li a {
+.navbar-links li a,
+.navbar-links li .navbar-link-btn {
+  display: inline-block;        /* necesario para que ::after funcione en button */
   font-family: 'Poppins', sans-serif;
   font-size: 0.9rem;
   font-weight: 500;
   color: #3b1a08;
   text-decoration: none;
-  transition: color 0.2s;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
   position: relative;
+  transition: color 0.2s;
 }
 
-.navbar-links li a::after {
+/* Línea roja animada */
+.navbar-links li a::after,
+.navbar-links li .navbar-link-btn::after {
   content: '';
   position: absolute;
   bottom: -4px;
@@ -64,26 +72,42 @@
   transition: width 0.2s;
 }
 
-.navbar-links li a:hover {
+.navbar-links li a:hover,
+.navbar-links li .navbar-link-btn:hover {
   color: #d50a0d;
 }
 
-.navbar-links li a:hover::after {
+.navbar-links li a:hover::after,
+.navbar-links li .navbar-link-btn:hover::after {
   width: 100%;
 }
 
-/* CTA */
+/* Link activo (NavLink en /productos) */
+.navbar-links li a.active,
+.navbar-links li .navbar-link-btn.active {
+  color: #d50a0d;
+}
+
+.navbar-links li a.active::after,
+.navbar-links li .navbar-link-btn.active::after {
+  width: 100%;
+}
+
+/* ── CTA ── */
 .navbar-cta {
+  display: inline-block;
   font-family: 'Poppins', sans-serif;
   font-size: 0.88rem;
   font-weight: 600;
   color: white;
   background-color: #c0392b;
+  border: none;
   padding: 10px 22px;
   border-radius: 999px;
   text-decoration: none;
+  cursor: pointer;
   transition: all 0.2s;
-  box-shadow: 0 3px 12px rgba(192,57,43,0.3);
+  box-shadow: 0 3px 12px rgba(192, 57, 43, 0.3);
 }
 
 .navbar-cta:hover {
@@ -91,6 +115,7 @@
   transform: translateY(-2px);
 }
 
+/* ── Responsive ── */
 @media (max-width: 768px) {
   .navbar {
     flex-direction: column;

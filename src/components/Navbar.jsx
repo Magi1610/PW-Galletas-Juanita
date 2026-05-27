@@ -1,24 +1,43 @@
+import { useLocation, useNavigate, Link } from 'react-router-dom'
 import '../styles/Navbar.css'
 import logo from '../assets/images/logo.png'
 
 function Navbar() {
+  const location = useLocation()
+  const navigate = useNavigate()
+
+  const handleScroll = (sectionId) => {
+    if (location.pathname === '/') {
+      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+    } else {
+      navigate('/')
+      setTimeout(() => {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+      }, 150)
+    }
+  }
+
   return (
     <nav className="navbar">
 
       <div className="navbar-logo">
-        <img src={logo} alt="Galletas Juanita" className="navbar-logo-img" />
+        <Link to="/">
+          <img src={logo} alt="Galletas Juanita" className="navbar-logo-img" />
+        </Link>
       </div>
 
       <ul className="navbar-links">
-        <li><a href="#inicio">Inicio</a></li>
-        <li><a href="#nosotros">Nosotros</a></li>
-        <li><a href="#productos">Productos</a></li>
-        <li><a href="#galeria">Galería</a></li>
-        <li><a href="#faq">FAQ</a></li>
-        <li><a href="#aliados">Clientes</a></li>
+        <li><button className="navbar-link-btn" onClick={() => handleScroll('inicio')}>Inicio</button></li>
+        <li><button className="navbar-link-btn" onClick={() => handleScroll('nosotros')}>Nosotros</button></li>
+        <li><button className="navbar-link-btn" onClick={() => handleScroll('productos')}>Productos</button></li>
+        <li><button className="navbar-link-btn" onClick={() => handleScroll('galeria')}>Galería</button></li>
+        <li><button className="navbar-link-btn" onClick={() => handleScroll('faq')}>FAQ</button></li>
+        <li><button className="navbar-link-btn" onClick={() => handleScroll('aliados')}>Clientes</button></li>
       </ul>
 
-      <a href="#contacto" className="navbar-cta">Contáctanos</a>
+      <button className="navbar-cta" onClick={() => handleScroll('contacto')}>
+        Contáctanos
+      </button>
 
     </nav>
   )
