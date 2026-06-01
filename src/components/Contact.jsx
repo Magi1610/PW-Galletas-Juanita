@@ -7,7 +7,9 @@ const TEMPLATE_ID = "template_o2uu1om"
 const PUBLIC_KEY  = "ZO1IFKOO1drMeGQ_j"
 
 function Contact() {
-  const [form, setForm] = useState({ nombre: "", email: "", telefono: "", mensaje: "" })
+  const [form, setForm] = useState({
+    nombre: "", email: "", telefono: "", ciudad: "", asunto: "", mensaje: ""
+  })
   const [status, setStatus] = useState("")
 
   const handleChange = (e) => {
@@ -15,20 +17,22 @@ function Contact() {
   }
 
   const handleSubmit = async () => {
-    if (!form.nombre || !form.email || !form.mensaje) {
+    if (!form.nombre || !form.email || !form.asunto || !form.mensaje) {
       setStatus("error")
       return
     }
     setStatus("sending")
     try {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-        nombre:    form.nombre,
-        email:     form.email,
-        telefono:  form.telefono,
-        mensaje:   form.mensaje,
+        nombre:   form.nombre,
+        email:    form.email,
+        telefono: form.telefono,
+        ciudad:   form.ciudad,
+        asunto:   form.asunto,
+        mensaje:  form.mensaje,
       }, PUBLIC_KEY)
       setStatus("success")
-      setForm({ nombre: "", email: "", telefono: "", mensaje: "" })
+      setForm({ nombre: "", email: "", telefono: "", ciudad: "", asunto: "", mensaje: "" })
     } catch {
       setStatus("error")
     }
@@ -60,13 +64,19 @@ function Contact() {
         </div>
 
         <div className="contact-form">
-          <input type="text" name="nombre" placeholder="Nombre completo" className="contact-input" value={form.nombre} onChange={handleChange} />
-          <input type="email" name="email" placeholder="Correo electronico" className="contact-input" value={form.email} onChange={handleChange} />
-          <input type="tel" name="telefono" placeholder="Telefono" className="contact-input" value={form.telefono} onChange={handleChange} />
-          <textarea name="mensaje" placeholder="Mensaje" className="contact-textarea" rows={5} value={form.mensaje} onChange={handleChange} />
+          <div className="contact-row">
+            <input type="text"  name="nombre"   placeholder="Nombre completo *"   className="contact-input" value={form.nombre}   onChange={handleChange} />
+            <input type="email" name="email"    placeholder="Correo electronico *" className="contact-input" value={form.email}    onChange={handleChange} />
+          </div>
+          <div className="contact-row">
+            <input type="tel"  name="telefono" placeholder="Telefono"             className="contact-input" value={form.telefono} onChange={handleChange} />
+            <input type="text" name="ciudad"   placeholder="Ciudad"               className="contact-input" value={form.ciudad}   onChange={handleChange} />
+          </div>
+          <input type="text" name="asunto" placeholder="Asunto *" className="contact-input" value={form.asunto} onChange={handleChange} />
+          <textarea name="mensaje" placeholder="Mensaje *" className="contact-textarea" rows={5} value={form.mensaje} onChange={handleChange} />
 
           {status === "success" && <p className="contact-msg success">Mensaje enviado correctamente!</p>}
-          {status === "error"   && <p className="contact-msg error">Por favor llena los campos requeridos.</p>}
+          {status === "error"   && <p className="contact-msg error">Por favor llena los campos requeridos (*).</p>}
           {status === "sending" && <p className="contact-msg sending">Enviando...</p>}
 
           <button className="contact-btn" onClick={handleSubmit} disabled={status === "sending"}>

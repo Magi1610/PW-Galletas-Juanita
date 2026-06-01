@@ -26,6 +26,7 @@ function Navbar() {
         </Link>
       </div>
 
+
       <ul className="navbar-links">
         <li><button className="navbar-link-btn" onClick={() => handleScroll('inicio')}>Inicio</button></li>
         <li><button className="navbar-link-btn" onClick={() => handleScroll('nosotros')}>Nosotros</button></li>
