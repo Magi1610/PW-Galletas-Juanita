@@ -2,6 +2,7 @@
 import { supabase } from "../supabase"
 
 export function useProducts() {
+  
   const [products,   setProducts]   = useState([])
   const [categories, setCategories] = useState([])
   const [loading,    setLoading]    = useState(true)

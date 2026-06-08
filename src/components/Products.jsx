@@ -1,4 +1,4 @@
-import "../styles/Products.css"
+﻿import "../styles/Products.css"
 import { Swiper, SwiperSlide } from "swiper/react"
 import { Navigation, Pagination, Autoplay } from "swiper/modules"
 import "swiper/css"
@@ -30,7 +30,7 @@ function Products() {
             spaceBetween={24}
             navigation
             pagination={{ clickable: true }}
-            autoplay={{ delay: 2500, disableOnInteraction: false }}
+            autoplay={{ delay: 3000, disableOnInteraction: false }}
             loop={products.length > 1}
             breakpoints={{
               0:    { slidesPerView: 1 },
@@ -46,11 +46,13 @@ function Products() {
                     <div className="product-img-wrapper">
                       <img src={product.img} alt={product.name} />
                       <div className="product-overlay">
-                        <span className="product-overlay-text">Ver mas</span>
+                        <span className="product-overlay-text">Ver producto</span>
                       </div>
                     </div>
                     <p className="product-name">{product.name}</p>
-                    {product.badge && <span className="product-badge">{product.badge}</span>}
+                    {product.badge && (
+                      <span className="product-badge">{product.badge}</span>
+                    )}
                   </div>
                 </Link>
               </SwiperSlide>
