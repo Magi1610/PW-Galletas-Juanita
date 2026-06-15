@@ -272,3 +272,11 @@
   from { opacity: 0; transform: translateY(-6px); }
   to   { opacity: 1; transform: translateY(0); }
 }
+
+.contact-loading-text {
+  font-family: 'Poppins', sans-serif;
+  font-size: 0.88rem;
+  color: #7a5c3e;
+  text-align: center;
+  padding: 12px 0;
+}

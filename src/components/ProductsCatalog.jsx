@@ -1,12 +1,18 @@
-﻿import { useState, useMemo } from "react"
+﻿import { useState, useMemo, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { useProducts } from "../hooks/useProducts"
 import "../styles/Catalog.css"
 
 function ProductsCatalog() {
   const { products, categories, loading, error } = useProducts()
-  const [activeCategory, setActiveCategory] = useState("all")
+  const [activeCategory, setActiveCategory] = useState("")
   const [search, setSearch] = useState("")
+
+  useEffect(() => {
+    if (categories.length > 1 && !activeCategory) {
+      setActiveCategory(categories[1].id)
+    }
+  }, [categories])
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
@@ -76,9 +82,6 @@ function ProductsCatalog() {
               </div>
               <div className="catalog-card-body">
                 <p className="catalog-card-name">{product.name}</p>
-                <p className="catalog-card-cat">
-                  {categories.find((c) => c.id === product.category)?.label}
-                </p>
                 <Link to={"/productos/" + product.slug} className="catalog-card-btn">
                   Ver producto
                 </Link>

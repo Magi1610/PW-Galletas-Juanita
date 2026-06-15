@@ -1,33 +1,29 @@
 ﻿import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
 import { supabase } from "../supabase"
-import { products as localProducts, categories } from "../data/products"
 import "../styles/ProductDetail.css"
 
 function ProductDetail() {
-  const { slug } = useParams()
-  const navigate = useNavigate()
+  const { slug }    = useParams()
+  const navigate    = useNavigate()
   const [product,   setProduct]   = useState(null)
+  const [category,  setCategory]  = useState(null)
   const [activeImg, setActiveImg] = useState(0)
   const [loading,   setLoading]   = useState(true)
 
   useEffect(() => {
     async function fetchProduct() {
-      try {
-        const { data, error } = await supabase
-          .from("productos")
-          .select("*")
-          .eq("slug", slug)
-          .single()
+      const { data, error } = await supabase
+        .from("productos")
+        .select("*, categorias(id, label)")
+        .eq("slug", slug)
+        .single()
 
-        if (error) throw error
+      if (!error && data) {
         setProduct(data)
-      } catch {
-        const local = localProducts.find((p) => p.slug === slug)
-        setProduct(local || null)
-      } finally {
-        setLoading(false)
+        setCategory(data.categorias)
       }
+      setLoading(false)
     }
     fetchProduct()
   }, [slug])
@@ -49,8 +45,11 @@ function ProductDetail() {
     )
   }
 
-  const categoryLabel = categories.find((c) => c.id === product.category)?.label ?? ""
-  const images = product.images || [product.img]
+  const images = (product.images && product.images.length > 0)
+    ? product.images
+    : [product.img]
+
+  const categoryLabel = category?.label ?? ""
 
   return (
     <div className="detail-page">
@@ -87,7 +86,6 @@ function ProductDetail() {
           <h1 className="detail-name">{product.name}</h1>
           {product.badge && <span className="detail-badge">{product.badge}</span>}
           <p className="detail-description">{product.description}</p>
-          <a href="/#contacto" className="detail-cta">Contactanos para pedidos</a>
         </div>
       </div>
     </div>

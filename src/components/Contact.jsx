@@ -1,75 +1,36 @@
 ﻿import { useState } from "react"
 import emailjs from "@emailjs/browser"
+import { useDepartamentos } from "../hooks/useDepartamentos"
 import "../styles/Contact.css"
 
 const SERVICE_ID  = "service_bpshxh6"
 const TEMPLATE_ID = "template_o2uu1om"
 const PUBLIC_KEY  = "ZO1IFKOO1drMeGQ_j"
 
-const departments = [
-  {
-    name: "Ventas",
-    email: "ventas@galletasjuanita.com.mx",
-    asuntos: [
-      "Pedido al mayoreo",
-      "Informacion de productos",
-      "Quiero ser distribuidor",
-      "Precios y catalogo",
-    ],
-  },
-  {
-    name: "Compras",
-    email: "compras@galletasjuanita.com.mx",
-    asuntos: [
-      "Registro como proveedor",
-      "Propuesta comercial",
-      "Informacion para proveedores",
-    ],
-  },
-  {
-    name: "Talento Humano",
-    email: "gestiondetalento@galletasjuanita.com.mx",
-    asuntos: [
-      "Postulacion a vacante",
-      "Practicas profesionales",
-      "Servicio social",
-      "Consulta sobre proceso de seleccion",
-    ],
-  },
-  {
-    name: "Ventas en linea",
-    email: "supervisiondigital@galletasjuanita.com.mx",
-    asuntos: [
-      "Problema con mi pedido",
-      "Cambio o devolucion",
-      "Seguimiento de envio",
-      "Metodo de pago",
-    ],
-  },
-]
-
 function Contact() {
+  const { departamentos, loading } = useDepartamentos()
+
   const [form, setForm] = useState({
     nombre: "", email: "", telefono: "", ciudad: "",
-    departamento: "", asunto: "", mensaje: ""
+    departamento_id: "", asunto: "", mensaje: ""
   })
   const [status, setStatus] = useState("")
 
-  const selectedDept = departments.find((d) => d.name === form.departamento)
-  const asuntos      = selectedDept ? selectedDept.asuntos : []
-  const toEmail      = selectedDept ? selectedDept.email : ""
+  const selectedDept  = departamentos.find((d) => String(d.id) === form.departamento_id)
+  const asuntos       = selectedDept ? selectedDept.asuntos : []
+  const toEmail       = selectedDept ? selectedDept.email : ""
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    if (name === "departamento") {
-      setForm({ ...form, departamento: value, asunto: "" })
+    if (name === "departamento_id") {
+      setForm({ ...form, departamento_id: value, asunto: "" })
     } else {
       setForm({ ...form, [name]: value })
     }
   }
 
   const handleSubmit = async () => {
-    if (!form.nombre || !form.email || !form.departamento || !form.asunto || !form.mensaje) {
+    if (!form.nombre || !form.email || !form.departamento_id || !form.asunto || !form.mensaje) {
       setStatus("error")
       return
     }
@@ -81,12 +42,12 @@ function Contact() {
         email:        form.email,
         telefono:     form.telefono || "No proporcionado",
         ciudad:       form.ciudad   || "No proporcionada",
-        departamento: form.departamento,
+        departamento: selectedDept?.nombre,
         asunto:       form.asunto,
         mensaje:      form.mensaje,
       }, PUBLIC_KEY)
       setStatus("success")
-      setForm({ nombre: "", email: "", telefono: "", ciudad: "", departamento: "", asunto: "", mensaje: "" })
+      setForm({ nombre: "", email: "", telefono: "", ciudad: "", departamento_id: "", asunto: "", mensaje: "" })
     } catch {
       setStatus("failed")
     }
@@ -122,7 +83,7 @@ function Contact() {
               <span className="contact-icon">🏢</span>
               <div>
                 <p className="contact-dept-label">Tu mensaje ira a</p>
-                <p className="contact-dept-name">{selectedDept.name}</p>
+                <p className="contact-dept-name">{selectedDept.nombre}</p>
                 <p className="contact-dept-email">{selectedDept.email}</p>
               </div>
             </div>
@@ -131,33 +92,39 @@ function Contact() {
 
         <div className="contact-form">
           <div className="contact-row">
-            <input type="text"  name="nombre"   placeholder="Nombre completo *"    className="contact-input" value={form.nombre}   onChange={handleChange} />
-            <input type="email" name="email"    placeholder="Correo electronico *" className="contact-input" value={form.email}    onChange={handleChange} />
+            <input type="text"  name="nombre"  placeholder="Nombre completo *"    className="contact-input" value={form.nombre}  onChange={handleChange} />
+            <input type="email" name="email"   placeholder="Correo electronico *" className="contact-input" value={form.email}   onChange={handleChange} />
           </div>
           <div className="contact-row">
-            <input type="tel"  name="telefono" placeholder="Telefono"              className="contact-input" value={form.telefono} onChange={handleChange} />
-            <input type="text" name="ciudad"   placeholder="Ciudad"                className="contact-input" value={form.ciudad}   onChange={handleChange} />
+            <input type="tel"  name="telefono" placeholder="Telefono"             className="contact-input" value={form.telefono} onChange={handleChange} />
+            <input type="text" name="ciudad"   placeholder="Ciudad"               className="contact-input" value={form.ciudad}   onChange={handleChange} />
           </div>
 
           <div className="contact-select-group">
-            <select name="departamento" className="contact-select" value={form.departamento} onChange={handleChange}>
-              <option value="">Selecciona un departamento *</option>
-              {departments.map((d) => (
-                <option key={d.name} value={d.name}>{d.name}</option>
-              ))}
-            </select>
+            {loading ? (
+              <p className="contact-loading-text">Cargando departamentos...</p>
+            ) : (
+              <>
+                <select name="departamento_id" className="contact-select" value={form.departamento_id} onChange={handleChange}>
+                  <option value="">Selecciona un departamento *</option>
+                  {departamentos.map((d) => (
+                    <option key={d.id} value={String(d.id)}>{d.nombre}</option>
+                  ))}
+                </select>
 
-            <select name="asunto" className="contact-select" value={form.asunto} onChange={handleChange} disabled={!form.departamento}>
-              <option value="">Selecciona un asunto *</option>
-              {asuntos.map((a) => (
-                <option key={a} value={a}>{a}</option>
-              ))}
-            </select>
+                <select name="asunto" className="contact-select" value={form.asunto} onChange={handleChange} disabled={!form.departamento_id}>
+                  <option value="">Selecciona un asunto *</option>
+                  {asuntos.map((a) => (
+                    <option key={a.id} value={a.asunto}>{a.asunto}</option>
+                  ))}
+                </select>
+              </>
+            )}
           </div>
 
           <textarea name="mensaje" placeholder="Mensaje *" className="contact-textarea" rows={5} value={form.mensaje} onChange={handleChange} />
 
-          {status === "success" && <p className="contact-msg success">Mensaje enviado correctamente a {selectedDept?.name}!</p>}
+          {status === "success" && <p className="contact-msg success">Mensaje enviado correctamente</p>}
           {status === "error"   && <p className="contact-msg error">Por favor llena todos los campos requeridos (*).</p>}
           {status === "failed"  && <p className="contact-msg error">Hubo un error al enviar. Intentalo de nuevo.</p>}
           {status === "sending" && <p className="contact-msg sending">Enviando...</p>}
