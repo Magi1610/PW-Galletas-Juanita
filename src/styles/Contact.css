@@ -141,23 +141,24 @@
   margin-bottom: 16px;
 }
 
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .contact { padding: 60px 40px; }
+}
+
+/* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
-  .contact {
-    padding: 50px 24px;
-  }
+  .contact { padding: 50px 24px; }
+  .contact-title { font-size: 2rem; }
+  .contact-body { flex-direction: column; }
+  .contact-btn { width: 100%; text-align: center; }
+}
 
-  .contact-title {
-    font-size: 2rem;
-  }
-
-  .contact-body {
-    flex-direction: column;
-  }
-
-  .contact-btn {
-    width: 100%;
-    text-align: center;
-  }
+/* ── Móvil pequeño (≤480px) ── */
+@media (max-width: 480px) {
+  .contact { padding: 40px 16px; }
+  .contact-title { font-size: 1.7rem; }
+  .contact-row { flex-direction: column; }
 }
 
 .contact-msg {

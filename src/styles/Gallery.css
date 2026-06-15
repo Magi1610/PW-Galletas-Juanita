@@ -64,7 +64,21 @@
   background-color: #c0392b !important;
 }
 
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .gallery { padding: 60px 32px; }
+  .gallery-slide { height: 200px; }
+}
+
+/* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
   .gallery { padding: 50px 24px; }
   .gallery-title { font-size: 2rem; }
+}
+
+/* ── Móvil pequeño (≤480px) ── */
+@media (max-width: 480px) {
+  .gallery { padding: 40px 16px; }
+  .gallery-title { font-size: 1.7rem; }
+  .gallery-slide { height: 170px; }
 }

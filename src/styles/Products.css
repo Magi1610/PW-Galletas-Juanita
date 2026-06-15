@@ -192,7 +192,17 @@
 }
 
 /* ── Responsive ── */
+@media (max-width: 1024px) {
+  .products { padding: 60px 32px; }
+}
+
 @media (max-width: 768px) {
   .products { padding: 50px 24px; }
   .products-title { font-size: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .products { padding: 40px 16px; }
+  .products-title { font-size: 1.7rem; }
+  .product-img-wrapper { height: 160px; }
 }

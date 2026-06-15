@@ -118,17 +118,21 @@
   margin: 0;
 }
 
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .footer { padding: 60px 40px 0; }
+  .footer-body { gap: 36px; }
+}
+
+/* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
-  .footer {
-    padding: 40px 24px 0;
-  }
+  .footer { padding: 40px 24px 0; }
+  .footer-body { flex-direction: column; gap: 30px; }
+  .footer-desc { max-width: 100%; }
+}
 
-  .footer-body {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .footer-desc {
-    max-width: 100%;
-  }
+/* ── Móvil pequeño (≤480px) ── */
+@media (max-width: 480px) {
+  .footer { padding: 40px 16px 0; }
+  .footer-logo { font-size: 1.3rem; }
 }

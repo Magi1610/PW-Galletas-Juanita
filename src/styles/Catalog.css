@@ -216,8 +216,25 @@
   to { transform: rotate(360deg); }
 }
 
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .catalog-page { padding: 40px 32px; }
+  .catalog-section-title { font-size: 1.7rem; }
+}
+
+/* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
   .catalog-page { padding: 24px 16px; }
   .catalog-grid { grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 16px; }
   .catalog-card-img { height: 160px; }
+}
+
+/* ── Móvil pequeño (≤480px) ── */
+@media (max-width: 480px) {
+  .catalog-page { padding: 20px 12px; }
+  .catalog-grid { grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); gap: 12px; }
+  .catalog-card-img { height: 130px; padding: 16px; }
+  .catalog-tab { padding: 8px 16px; font-size: 0.82rem; }
+  .catalog-section-title { font-size: 1.5rem; }
+  .catalog-search { max-width: 100%; }
 }

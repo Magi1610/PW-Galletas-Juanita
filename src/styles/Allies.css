@@ -201,10 +201,23 @@
   to   { opacity: 1; transform: translateY(0); }
 }
 
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .allies { padding: 50px 32px; }
+}
+
+/* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
   .allies { padding: 50px 24px; }
   .allies-title { font-size: 1.8rem; }
   .ally-store-card:hover { transform: none; }
+}
+
+/* ── Móvil pequeño (≤480px) ── */
+@media (max-width: 480px) {
+  .allies { padding: 40px 16px; }
+  .allies-title { font-size: 1.6rem; }
+  .allies-select-wrapper { min-width: unset; width: 100%; }
 }
 
 .allies-loading {
