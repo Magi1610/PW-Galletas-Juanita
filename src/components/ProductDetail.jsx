@@ -45,6 +45,7 @@ function ProductDetail() {
     )
   }
 
+  const logo   = product.logo || null
   const images = (product.images && product.images.length > 0)
     ? product.images
     : [product.img]
@@ -60,6 +61,12 @@ function ProductDetail() {
         <span>/</span>
         <span>{product.name}</span>
       </nav>
+
+      {logo && (
+        <div className="detail-logo-section">
+          <img src={logo} alt={"Logo " + product.name} className="detail-logo" />
+        </div>
+      )}
 
       <div className="detail-body">
         <div className="detail-gallery">
@@ -82,8 +89,6 @@ function ProductDetail() {
         </div>
 
         <div className="detail-info">
-          <p className="detail-category">{categoryLabel}</p>
-          <h1 className="detail-name">{product.name}</h1>
           {product.badge && <span className="detail-badge">{product.badge}</span>}
           <p className="detail-description">{product.description}</p>
         </div>
