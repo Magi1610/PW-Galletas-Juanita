@@ -3,13 +3,25 @@ import { useParams, useNavigate } from "react-router-dom"
 import { supabase } from "../supabase"
 import "../styles/ProductDetail.css"
 
+const CATEGORY_COLORS = {
+  "Chispas":           "rgb(54,  24,  20)",
+  "Estrellas":         "rgb(255, 154, 222)",
+  "Orejitas":          "rgb(255, 132, 1)",
+  "Polvorones":        "rgb(247, 148, 29)",
+  "Surtido":           "rgb(236, 28,  36)",
+  "Tartaletas":        "rgb(174, 42,  61)",
+  "Barritas con nuez": "rgb(158, 51,  32)",
+}
+
+const DEFAULT_COLOR = "#c0392b"
+
 function ProductDetail() {
-  const { slug }    = useParams()
-  const navigate    = useNavigate()
-  const [product,   setProduct]   = useState(null)
-  const [category,  setCategory]  = useState(null)
+  const { slug }   = useParams()
+  const navigate   = useNavigate()
+  const [product,  setProduct]  = useState(null)
+  const [category, setCategory] = useState(null)
   const [activeImg, setActiveImg] = useState(0)
-  const [loading,   setLoading]   = useState(true)
+  const [loading,  setLoading]  = useState(true)
 
   useEffect(() => {
     async function fetchProduct() {
@@ -40,20 +52,18 @@ function ProductDetail() {
     return (
       <div className="detail-not-found">
         <p>Producto no encontrado.</p>
-        <button onClick={() => navigate("/productos")}>Volver al catalogo</button>
+        <button onClick={() => navigate("/productos")}>Volver al catálogo</button>
       </div>
     )
   }
 
-  const logo   = product.logo || null
-  const images = (product.images && product.images.length > 0)
-    ? product.images
-    : [product.img]
-
+  const logo          = product.logo || null
+  const images        = (product.images && product.images.length > 0) ? product.images : [product.img]
   const categoryLabel = category?.label ?? ""
+  const accent        = CATEGORY_COLORS[categoryLabel] ?? DEFAULT_COLOR  // ← color activo
 
   return (
-    <div className="detail-page">
+    <div className="detail-page" style={{ "--accent": accent }}>  {/* ← inyecta la variable */}
       <nav className="detail-breadcrumb">
         <button onClick={() => navigate("/productos")}>Productos</button>
         <span>/</span>

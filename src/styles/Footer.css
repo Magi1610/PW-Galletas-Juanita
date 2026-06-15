@@ -21,14 +21,14 @@
 }
 
 .footer-logo {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.6rem;
   color: #fff;
   margin-bottom: 14px;
 }
 
 .footer-desc {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
   color: #c9a880;
   line-height: 1.7;
@@ -42,7 +42,7 @@
 }
 
 .footer-nav-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
   color: #fff;
@@ -60,7 +60,7 @@
 }
 
 .footer-nav ul li a {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: #c9a880;
   text-decoration: none;
@@ -92,7 +92,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.9rem;
   text-decoration: none;
@@ -112,7 +112,7 @@
 }
 
 .footer-bottom p {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   color: #c9a880;
   margin: 0;

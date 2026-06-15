@@ -20,7 +20,7 @@
   border: 2px solid #c0392b;
   background: transparent;
   color: #c0392b;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 600;
   cursor: pointer;
@@ -41,7 +41,7 @@
 /* ── Título de sección ── */
 .catalog-section-title {
   text-align: center;
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 2rem;
   font-weight: 700;
   color: #3b1a08;
@@ -61,7 +61,7 @@
   padding: 12px 20px;
   border: 1px solid #e0d0bb;
   border-radius: 999px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: #3b1a08;
   background-color: #fff;
@@ -129,7 +129,7 @@
   left: 12px;
   background-color: #c0392b;
   color: white;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.7rem;
   font-weight: 600;
   padding: 3px 10px;
@@ -145,7 +145,7 @@
 }
 
 .catalog-card-name {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.05rem;
   font-weight: 700;
   color: #3b1a08;
@@ -153,7 +153,7 @@
 }
 
 .catalog-card-cat {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.78rem;
   color: #c0392b;
   font-weight: 500;
@@ -171,7 +171,7 @@
   padding: 10px 0;
   width: 100%;
   border-radius: 8px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.85rem;
   cursor: pointer;
@@ -186,7 +186,7 @@
 /* ── Empty / Loading ── */
 .catalog-empty {
   text-align: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   color: #7a5c3e;
   padding: 60px 0;
   grid-column: 1 / -1;
@@ -199,7 +199,7 @@
   justify-content: center;
   gap: 16px;
   min-height: 60vh;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   color: #7a5c3e;
 }
 

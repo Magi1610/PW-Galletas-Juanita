@@ -46,7 +46,7 @@
 .navbar-links li a,
 .navbar-links li .navbar-link-btn {
   display: inline-block;        /* necesario para que ::after funcione en button */
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   font-weight: 500;
   color: #3b1a08;
@@ -96,7 +96,7 @@
 /* ── CTA ── */
 .navbar-cta {
   display: inline-block;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.88rem;
   font-weight: 600;
   color: white;

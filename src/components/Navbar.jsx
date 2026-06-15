@@ -30,7 +30,7 @@ function Navbar() {
       <ul className="navbar-links">
         <li><button className="navbar-link-btn" onClick={() => handleScroll('inicio')}>Inicio</button></li>
         <li><button className="navbar-link-btn" onClick={() => handleScroll('nosotros')}>Nosotros</button></li>
-        <li><button className="navbar-link-btn" onClick={() => handleScroll('productos')}>Productos</button></li>
+        <li><Link to="/productos" className="navbar-link-btn">Productos</Link></li>
         <li><button className="navbar-link-btn" onClick={() => handleScroll('galeria')}>Galería</button></li>
         <li><button className="navbar-link-btn" onClick={() => handleScroll('faq')}>FAQ</button></li>
         <li><button className="navbar-link-btn" onClick={() => handleScroll('aliados')}>Clientes</button></li>

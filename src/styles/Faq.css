@@ -12,7 +12,7 @@
 }
 
 .faq-label {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
   color: #c0392b;
@@ -21,7 +21,7 @@
 }
 
 .faq-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 2.6rem;
   font-weight: 700;
   color: #3b1a08;
@@ -64,7 +64,7 @@
   justify-content: space-between;
   align-items: center;
   cursor: pointer;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   font-weight: 500;
   color: #3b1a08;
@@ -85,7 +85,7 @@
 
 .faq-answer {
   padding: 0 24px 20px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
   color: #7a5c3e;
   line-height: 1.7;

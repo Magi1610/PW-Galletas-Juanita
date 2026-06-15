@@ -36,7 +36,7 @@ function ProductsCatalog() {
   if (error) {
     return (
       <div className="catalog-loading">
-        <p style={{ color: "#c0392b", fontFamily: "Poppins, sans-serif" }}>
+        <p style={{ color: "#c0392b" }}>
           Error al cargar productos: {error}
         </p>
       </div>

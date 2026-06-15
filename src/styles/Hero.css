@@ -20,7 +20,7 @@
   display: inline-block;
   background-color: #c0392b;
   color: white;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
   padding: 6px 18px;
@@ -30,7 +30,7 @@
 }
 
 .hero-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 3.4rem;
   font-weight: 700;
   color: #3b1a08;
@@ -45,7 +45,7 @@
 }
 
 .hero-subtitle {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   color: #7a5c3e;
   margin-bottom: 36px;
@@ -66,7 +66,7 @@
   color: white;
   padding: 13px 30px;
   border-radius: 999px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
@@ -86,7 +86,7 @@
   color: #c0392b;
   padding: 11px 28px;
   border-radius: 999px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
@@ -112,7 +112,7 @@
 }
 
 .hero-stat-number {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.8rem;
   font-weight: 700;
   color: #c0392b;
@@ -120,7 +120,7 @@
 }
 
 .hero-stat-label {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   color: #7a5c3e;
   margin-top: 4px;

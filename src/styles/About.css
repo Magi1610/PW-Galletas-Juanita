@@ -28,7 +28,7 @@
 }
 
 .about-label {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
   color: #c0392b;
@@ -37,7 +37,7 @@
 }
 
 .about-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 2.8rem;
   font-weight: 700;
   color: #3b1a08;
@@ -53,7 +53,7 @@
 }
 
 .about-text {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   color: #7a5c3e;
   line-height: 1.8;
@@ -66,7 +66,7 @@
   color: white;
   padding: 13px 30px;
   border-radius: 999px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
