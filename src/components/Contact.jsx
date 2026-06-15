@@ -6,35 +6,89 @@ const SERVICE_ID  = "service_bpshxh6"
 const TEMPLATE_ID = "template_o2uu1om"
 const PUBLIC_KEY  = "ZO1IFKOO1drMeGQ_j"
 
+const departments = [
+  {
+    name: "Ventas",
+    email: "ventas@galletasjuanita.com.mx",
+    asuntos: [
+      "Pedido al mayoreo",
+      "Informacion de productos",
+      "Quiero ser distribuidor",
+      "Precios y catalogo",
+    ],
+  },
+  {
+    name: "Compras",
+    email: "compras@galletasjuanita.com.mx",
+    asuntos: [
+      "Registro como proveedor",
+      "Propuesta comercial",
+      "Informacion para proveedores",
+    ],
+  },
+  {
+    name: "Talento Humano",
+    email: "gestiondetalento@galletasjuanita.com.mx",
+    asuntos: [
+      "Postulacion a vacante",
+      "Practicas profesionales",
+      "Servicio social",
+      "Consulta sobre proceso de seleccion",
+    ],
+  },
+  {
+    name: "Ventas en linea",
+    email: "supervisiondigital@galletasjuanita.com.mx",
+    asuntos: [
+      "Problema con mi pedido",
+      "Cambio o devolucion",
+      "Seguimiento de envio",
+      "Metodo de pago",
+    ],
+  },
+]
+
 function Contact() {
   const [form, setForm] = useState({
-    nombre: "", email: "", telefono: "", ciudad: "", asunto: "", mensaje: ""
+    nombre: "", email: "", telefono: "", ciudad: "",
+    departamento: "", asunto: "", mensaje: ""
   })
   const [status, setStatus] = useState("")
 
+  const selectedDept = departments.find((d) => d.name === form.departamento)
+  const asuntos      = selectedDept ? selectedDept.asuntos : []
+  const toEmail      = selectedDept ? selectedDept.email : ""
+
   const handleChange = (e) => {
-    setForm({ ...form, [e.target.name]: e.target.value })
+    const { name, value } = e.target
+    if (name === "departamento") {
+      setForm({ ...form, departamento: value, asunto: "" })
+    } else {
+      setForm({ ...form, [name]: value })
+    }
   }
 
   const handleSubmit = async () => {
-    if (!form.nombre || !form.email || !form.asunto || !form.mensaje) {
+    if (!form.nombre || !form.email || !form.departamento || !form.asunto || !form.mensaje) {
       setStatus("error")
       return
     }
     setStatus("sending")
     try {
       await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-        nombre:   form.nombre,
-        email:    form.email,
-        telefono: form.telefono,
-        ciudad:   form.ciudad,
-        asunto:   form.asunto,
-        mensaje:  form.mensaje,
+        to_email:     toEmail,
+        nombre:       form.nombre,
+        email:        form.email,
+        telefono:     form.telefono || "No proporcionado",
+        ciudad:       form.ciudad   || "No proporcionada",
+        departamento: form.departamento,
+        asunto:       form.asunto,
+        mensaje:      form.mensaje,
       }, PUBLIC_KEY)
       setStatus("success")
-      setForm({ nombre: "", email: "", telefono: "", ciudad: "", asunto: "", mensaje: "" })
+      setForm({ nombre: "", email: "", telefono: "", ciudad: "", departamento: "", asunto: "", mensaje: "" })
     } catch {
-      setStatus("error")
+      setStatus("failed")
     }
   }
 
@@ -47,6 +101,7 @@ function Contact() {
       </div>
 
       <div className="contact-body">
+
         <div className="contact-info">
           <h3>Informacion de contacto</h3>
           <div className="contact-info-item">
@@ -61,22 +116,50 @@ function Contact() {
             <span className="contact-icon">✉️</span>
             <p>contacto@galletasjuanita.com</p>
           </div>
+
+          {selectedDept && (
+            <div className="contact-dept-badge">
+              <span className="contact-icon">🏢</span>
+              <div>
+                <p className="contact-dept-label">Tu mensaje ira a</p>
+                <p className="contact-dept-name">{selectedDept.name}</p>
+                <p className="contact-dept-email">{selectedDept.email}</p>
+              </div>
+            </div>
+          )}
         </div>
 
         <div className="contact-form">
           <div className="contact-row">
-            <input type="text"  name="nombre"   placeholder="Nombre completo *"   className="contact-input" value={form.nombre}   onChange={handleChange} />
+            <input type="text"  name="nombre"   placeholder="Nombre completo *"    className="contact-input" value={form.nombre}   onChange={handleChange} />
             <input type="email" name="email"    placeholder="Correo electronico *" className="contact-input" value={form.email}    onChange={handleChange} />
           </div>
           <div className="contact-row">
-            <input type="tel"  name="telefono" placeholder="Telefono"             className="contact-input" value={form.telefono} onChange={handleChange} />
-            <input type="text" name="ciudad"   placeholder="Ciudad"               className="contact-input" value={form.ciudad}   onChange={handleChange} />
+            <input type="tel"  name="telefono" placeholder="Telefono"              className="contact-input" value={form.telefono} onChange={handleChange} />
+            <input type="text" name="ciudad"   placeholder="Ciudad"                className="contact-input" value={form.ciudad}   onChange={handleChange} />
           </div>
-          <input type="text" name="asunto" placeholder="Asunto *" className="contact-input" value={form.asunto} onChange={handleChange} />
+
+          <div className="contact-select-group">
+            <select name="departamento" className="contact-select" value={form.departamento} onChange={handleChange}>
+              <option value="">Selecciona un departamento *</option>
+              {departments.map((d) => (
+                <option key={d.name} value={d.name}>{d.name}</option>
+              ))}
+            </select>
+
+            <select name="asunto" className="contact-select" value={form.asunto} onChange={handleChange} disabled={!form.departamento}>
+              <option value="">Selecciona un asunto *</option>
+              {asuntos.map((a) => (
+                <option key={a} value={a}>{a}</option>
+              ))}
+            </select>
+          </div>
+
           <textarea name="mensaje" placeholder="Mensaje *" className="contact-textarea" rows={5} value={form.mensaje} onChange={handleChange} />
 
-          {status === "success" && <p className="contact-msg success">Mensaje enviado correctamente!</p>}
-          {status === "error"   && <p className="contact-msg error">Por favor llena los campos requeridos (*).</p>}
+          {status === "success" && <p className="contact-msg success">Mensaje enviado correctamente a {selectedDept?.name}!</p>}
+          {status === "error"   && <p className="contact-msg error">Por favor llena todos los campos requeridos (*).</p>}
+          {status === "failed"  && <p className="contact-msg error">Hubo un error al enviar. Intentalo de nuevo.</p>}
           {status === "sending" && <p className="contact-msg sending">Enviando...</p>}
 
           <button className="contact-btn" onClick={handleSubmit} disabled={status === "sending"}>
@@ -96,6 +179,7 @@ function Contact() {
             loading="lazy"
           />
         </div>
+
       </div>
     </section>
   )
