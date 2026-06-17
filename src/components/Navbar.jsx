@@ -33,7 +33,7 @@ function Navbar() {
 
         <ul className="navbar-links">
           <li><button className="navbar-link-btn" onClick={() => handleScroll('inicio')}>Inicio</button></li>
-          <li><button className="navbar-link-btn" onClick={() => handleScroll('nosotros')}>Nosotros</button></li>
+          <li><Link to="/nosotros" className="navbar-link-btn">Nosotros</Link></li>
           <li><Link to="/productos" className="navbar-link-btn">Productos</Link></li>
           <li><button className="navbar-link-btn" onClick={() => handleScroll('galeria')}>Galería</button></li>
           <li><button className="navbar-link-btn" onClick={() => handleScroll('faq')}>FAQ</button></li>
@@ -65,7 +65,7 @@ function Navbar() {
 
         <ul className="navbar-drawer-links">
           <li><button onClick={() => handleScroll('inicio')}>Inicio</button></li>
-          <li><button onClick={() => handleScroll('nosotros')}>Nosotros</button></li>
+          <li><Link to="/nosotros" onClick={close}>Nosotros</Link></li>
           <li><Link to="/productos" onClick={close}>Productos</Link></li>
           <li><button onClick={() => handleScroll('galeria')}>Galería</button></li>
           <li><button onClick={() => handleScroll('faq')}>FAQ</button></li>

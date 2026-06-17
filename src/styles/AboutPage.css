@@ -1,0 +1,223 @@
+.about-page {
+  background-color: #fdf6ee;
+  min-height: 100vh;
+}
+
+.about-page-label {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: #c0392b;
+  letter-spacing: 2px;
+  text-transform: uppercase;
+}
+
+.about-page-title {
+  font-family: var(--font-heading);
+  font-size: 2.4rem;
+  font-weight: 700;
+  color: #3b1a08;
+  line-height: 1.2;
+  margin: 10px 0 12px;
+}
+
+.about-page-underline {
+  width: 50px;
+  height: 3px;
+  background-color: #c9a84c;
+  margin-bottom: 24px;
+}
+
+.about-page-text {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #7a5c3e;
+  line-height: 1.8;
+  margin-bottom: 16px;
+}
+
+/* ── Hero ── */
+.about-hero {
+  text-align: center;
+  padding: 90px 80px 60px;
+  max-width: 760px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-hero-title {
+  font-family: var(--font-heading);
+  font-size: 3rem;
+  font-weight: 700;
+  color: #3b1a08;
+  line-height: 1.2;
+  margin: 10px 0 12px;
+}
+
+.about-hero-text {
+  font-family: var(--font-body);
+  font-size: 1rem;
+  color: #7a5c3e;
+  line-height: 1.8;
+}
+
+/* ── Historia ── */
+.about-history {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 80px 80px;
+  gap: 60px;
+}
+
+.about-history-image {
+  flex: 1;
+  min-width: 280px;
+  max-width: 500px;
+}
+
+.about-history-image img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-history-content {
+  flex: 1;
+  min-width: 280px;
+  max-width: 520px;
+}
+
+/* ── Misión / Visión ── */
+.about-mv {
+  display: flex;
+  justify-content: center;
+  gap: 32px;
+  padding: 0 80px 80px;
+  flex-wrap: wrap;
+}
+
+.about-mv-card {
+  background-color: #fff5f0;
+  border-radius: 16px;
+  padding: 40px 32px;
+  max-width: 420px;
+  flex: 1;
+  min-width: 280px;
+  text-align: center;
+}
+
+.about-mv-icon {
+  font-size: 2.2rem;
+}
+
+.about-mv-title {
+  font-family: var(--font-heading);
+  font-size: 1.5rem;
+  font-weight: 700;
+  color: #3b1a08;
+  margin: 12px 0 14px;
+}
+
+.about-mv-text {
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  color: #7a5c3e;
+  line-height: 1.8;
+}
+
+/* ── Valores ── */
+.about-values {
+  text-align: center;
+  padding: 0 80px 80px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-values .about-page-underline {
+  margin: 0 auto 36px;
+}
+
+.about-values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  max-width: 1000px;
+  width: 100%;
+}
+
+.about-value-card {
+  background-color: #fff;
+  border: 1px solid #f0e6d3;
+  border-radius: 16px;
+  padding: 32px 24px;
+}
+
+.about-value-title {
+  font-family: var(--font-heading);
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #c0392b;
+  margin-bottom: 12px;
+}
+
+.about-value-text {
+  font-family: var(--font-body);
+  font-size: 0.9rem;
+  color: #7a5c3e;
+  line-height: 1.7;
+}
+
+/* ── Ubicación ── */
+.about-location {
+  text-align: center;
+  padding: 0 80px 90px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.about-location .about-page-underline {
+  margin: 0 auto 24px;
+}
+
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .about-hero { padding: 70px 40px 50px; }
+  .about-history { padding: 30px 40px 60px; gap: 40px; }
+  .about-mv { padding: 0 40px 60px; }
+  .about-values { padding: 0 40px 60px; }
+  .about-location { padding: 0 40px 70px; }
+  .about-values-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+/* ── Móvil (≤768px) ── */
+@media (max-width: 768px) {
+  .about-hero { padding: 50px 24px 40px; }
+  .about-hero-title { font-size: 2.2rem; }
+
+  .about-history {
+    flex-direction: column;
+    padding: 40px 24px;
+    text-align: center;
+  }
+  .about-history-image img { height: 280px; }
+
+  .about-mv { padding: 0 24px 50px; }
+  .about-values { padding: 0 24px 50px; }
+  .about-location { padding: 0 24px 60px; }
+
+  .about-page-title { font-size: 1.9rem; }
+  .about-values-grid { grid-template-columns: 1fr; }
+}
+
+/* ── Móvil pequeño (≤480px) ── */
+@media (max-width: 480px) {
+  .about-hero-title { font-size: 1.8rem; }
+  .about-page-title { font-size: 1.6rem; }
+}

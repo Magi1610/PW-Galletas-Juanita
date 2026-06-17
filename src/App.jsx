@@ -6,6 +6,7 @@ import ScrollToTop from "./components/ScrollToTop"
 import Home from './components/Home'
 import ProductsCatalog from './components/ProductsCatalog'
 import ProductDetail from './components/ProductDetail'
+import AboutPage from './components/AboutPage'
 
 function App() {
   return (
@@ -15,6 +16,7 @@ function App() {
       <WhatsAppButton />
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/nosotros" element={<AboutPage />} />
         <Route path="/productos" element={<ProductsCatalog />} />
         <Route path="/productos/:slug" element={<ProductDetail />} />
       </Routes>

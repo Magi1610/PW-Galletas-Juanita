@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom'
 import '../styles/Footer.css'
 
 function Footer() {
@@ -20,7 +21,7 @@ function Footer() {
           <h4 className="footer-nav-title">NAVEGACIÓN</h4>
           <ul>
             <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#nosotros">Nosotros</a></li>
+            <li><Link to="/nosotros">Nosotros</Link></li>
             <li><a href="#productos">Productos</a></li>
             <li><a href="#galeria">Galería</a></li>
             <li><a href="#faq">FAQ</a></li>
