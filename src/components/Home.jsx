@@ -3,7 +3,6 @@ import Gallery from './Gallery'
 import Faq from './Faq'
 import Contact from './Contact'
 import About from './About'
-import Allies from './Allies'
 
 function Home() {
   return (
@@ -12,7 +11,6 @@ function Home() {
       <About />
       <Gallery />
       <Faq />
-      <Allies />
       <Contact />
     </>
   )

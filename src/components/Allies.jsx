@@ -1,12 +1,80 @@
-﻿import { useState, useEffect } from "react"
+import { useState, useEffect, useMemo } from "react"
+import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
+import L from "leaflet"
+import markerIcon from "leaflet/dist/images/marker-icon.png"
+import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png"
+import markerShadow from "leaflet/dist/images/marker-shadow.png"
+import "leaflet/dist/leaflet.css"
 import { supabase } from "../supabase"
 import "../styles/Allies.css"
 
+delete L.Icon.Default.prototype._getIconUrl
+L.Icon.Default.mergeOptions({
+  iconRetinaUrl: markerIcon2x,
+  iconUrl: markerIcon,
+  shadowUrl: markerShadow,
+})
+
+const GEOCODE_CACHE_KEY = "gj-geocode-cache"
+
+function loadGeocodeCache() {
+  try {
+    return new Map(Object.entries(JSON.parse(localStorage.getItem(GEOCODE_CACHE_KEY) || "{}")))
+  } catch {
+    return new Map()
+  }
+}
+
+function saveGeocodeCache(cache) {
+  try {
+    localStorage.setItem(GEOCODE_CACHE_KEY, JSON.stringify(Object.fromEntries(cache)))
+  } catch {
+    // almacenamiento no disponible, se ignora
+  }
+}
+
+const geocodeCache = loadGeocodeCache()
+
+async function geocodeAddress(query) {
+  if (geocodeCache.has(query)) {
+    return { coords: geocodeCache.get(query), fromCache: true }
+  }
+  try {
+    const res = await fetch(
+      `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`
+    )
+    const data = await res.json()
+    const coords = data[0] ? { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) } : null
+    geocodeCache.set(query, coords)
+    saveGeocodeCache(geocodeCache)
+    return { coords, fromCache: false }
+  } catch {
+    return { coords: null, fromCache: false }
+  }
+}
+
+function FitBounds({ points }) {
+  const map = useMap()
+
+  useEffect(() => {
+    if (points.length === 0) return
+    if (points.length === 1) {
+      map.setView([points[0].lat, points[0].lng], 14)
+    } else {
+      map.fitBounds(points.map((p) => [p.lat, p.lng]), { padding: [40, 40] })
+    }
+  }, [points, map])
+
+  return null
+}
+
 function Allies() {
-  const [allData,       setAllData]       = useState([])
-  const [loading,       setLoading]       = useState(true)
-  const [selectedState, setSelectedState] = useState("")
-  const [selectedCity,  setSelectedCity]  = useState("")
+  const [allData,        setAllData]        = useState([])
+  const [loading,        setLoading]        = useState(true)
+  const [selectedState,  setSelectedState]  = useState("")
+  const [selectedCity,   setSelectedCity]   = useState("")
+  const [storeLocations, setStoreLocations] = useState([])
+  const [geoLoading,     setGeoLoading]     = useState(false)
 
   useEffect(() => {
     async function fetchTiendas() {
@@ -22,13 +90,54 @@ function Allies() {
     fetchTiendas()
   }, [])
 
-  const states = [...new Set(allData.map((t) => t.estado))]
-  const cities = selectedState
-    ? [...new Set(allData.filter((t) => t.estado === selectedState).map((t) => t.municipio))]
-    : []
-  const stores = selectedState && selectedCity
-    ? allData.filter((t) => t.estado === selectedState && t.municipio === selectedCity)
-    : []
+  const states = useMemo(() => [...new Set(allData.map((t) => t.estado))], [allData])
+
+  const cities = useMemo(() => (
+    selectedState
+      ? [...new Set(allData.filter((t) => t.estado === selectedState).map((t) => t.municipio))]
+      : []
+  ), [allData, selectedState])
+
+  const stores = useMemo(() => (
+    selectedState && selectedCity
+      ? allData.filter((t) => t.estado === selectedState && t.municipio === selectedCity)
+      : []
+  ), [allData, selectedState, selectedCity])
+
+  useEffect(() => {
+    let cancelled = false
+
+    async function locateStores() {
+      if (stores.length === 0) {
+        setStoreLocations([])
+        return
+      }
+
+      setGeoLoading(true)
+      const results = []
+
+      for (const store of stores) {
+        if (store.lat != null && store.lng != null) {
+          results.push({ ...store, lat: Number(store.lat), lng: Number(store.lng) })
+          continue
+        }
+
+        const query = `${store.direccion}, ${store.municipio}, ${store.estado}, México`
+        const { coords, fromCache } = await geocodeAddress(query)
+        if (cancelled) return
+        if (coords) results.push({ ...store, lat: coords.lat, lng: coords.lng })
+        if (!fromCache) await new Promise((r) => setTimeout(r, 350))
+      }
+
+      if (!cancelled) {
+        setStoreLocations(results)
+        setGeoLoading(false)
+      }
+    }
+
+    locateStores()
+    return () => { cancelled = true }
+  }, [stores])
 
   const handleStateChange = (e) => {
     setSelectedState(e.target.value)
@@ -39,7 +148,7 @@ function Allies() {
     <section id="aliados" className="allies">
       <div className="allies-header">
         <span className="allies-label">ALIADOS COMERCIALES</span>
-        <h2 className="allies-title">Donde encontrarnos</h2>
+        <h2 className="allies-title">Encuentra tu local más cercano</h2>
         <div className="allies-underline"></div>
         <p className="allies-subtitle">
           Selecciona tu estado y municipio para encontrar el punto de venta mas cercano.
@@ -113,6 +222,34 @@ function Allies() {
                       </div>
                     </div>
                   ))}
+                </div>
+
+                <div className="allies-map-wrapper">
+                  {storeLocations.length > 0 ? (
+                    <MapContainer
+                      center={[storeLocations[0].lat, storeLocations[0].lng]}
+                      zoom={13}
+                      scrollWheelZoom={false}
+                      className="allies-map"
+                    >
+                      <TileLayer
+                        attribution='&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a>'
+                        url="https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png"
+                      />
+                      <FitBounds points={storeLocations} />
+                      {storeLocations.map((store) => (
+                        <Marker key={store.id} position={[store.lat, store.lng]}>
+                          <Popup>
+                            <strong>{store.nombre}</strong><br />{store.direccion}
+                          </Popup>
+                        </Marker>
+                      ))}
+                    </MapContainer>
+                  ) : (
+                    <div className="allies-map-loading">
+                      {geoLoading ? "Ubicando los locales en el mapa..." : "No pudimos ubicar estos locales en el mapa."}
+                    </div>
+                  )}
                 </div>
               </div>
             )}

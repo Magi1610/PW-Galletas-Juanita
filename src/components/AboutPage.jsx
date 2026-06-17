@@ -1,3 +1,4 @@
+import Allies from "./Allies"
 import "../styles/AboutPage.css"
 
 function AboutPage() {
@@ -99,8 +100,8 @@ function AboutPage() {
       </section>
 
       <section className="about-location">
-        <span className="about-page-label">VISÍTANOS</span>
-        <h2 className="about-page-title">Dónde encontrarnos</h2>
+        <span className="about-page-label">OFICINAS</span>
+        <h2 className="about-page-title">Visítanos</h2>
         <div className="about-page-underline"></div>
         <p className="about-page-text">
           Calle Maestros 10, San Pedro Atzompa, Tecámac, 55770, México
@@ -109,6 +110,8 @@ function AboutPage() {
           Tel: 55-90-74-88-44 &nbsp;·&nbsp; contacto@galletasjuanita.com
         </p>
       </section>
+
+      <Allies />
 
     </div>
   )

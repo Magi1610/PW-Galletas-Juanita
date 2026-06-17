@@ -10,12 +10,12 @@ function Navbar() {
 
   const close = () => setIsOpen(false)
 
-  const handleScroll = (sectionId) => {
+  const handleScroll = (sectionId, path = '/') => {
     close()
-    if (location.pathname === '/') {
+    if (location.pathname === path) {
       document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
     } else {
-      navigate('/')
+      navigate(path)
       setTimeout(() => {
         document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
       }, 150)
@@ -37,7 +37,7 @@ function Navbar() {
           <li><Link to="/productos" className="navbar-link-btn">Productos</Link></li>
           <li><button className="navbar-link-btn" onClick={() => handleScroll('galeria')}>Galería</button></li>
           <li><button className="navbar-link-btn" onClick={() => handleScroll('faq')}>FAQ</button></li>
-          <li><button className="navbar-link-btn" onClick={() => handleScroll('aliados')}>Clientes</button></li>
+          <li><button className="navbar-link-btn" onClick={() => handleScroll('aliados', '/nosotros')}>Clientes</button></li>
         </ul>
 
         <button className="navbar-cta" onClick={() => handleScroll('contacto')}>
@@ -69,7 +69,7 @@ function Navbar() {
           <li><Link to="/productos" onClick={close}>Productos</Link></li>
           <li><button onClick={() => handleScroll('galeria')}>Galería</button></li>
           <li><button onClick={() => handleScroll('faq')}>FAQ</button></li>
-          <li><button onClick={() => handleScroll('aliados')}>Clientes</button></li>
+          <li><button onClick={() => handleScroll('aliados', '/nosotros')}>Clientes</button></li>
         </ul>
 
         <button className="navbar-drawer-cta" onClick={() => handleScroll('contacto')}>
