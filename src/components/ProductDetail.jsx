@@ -15,11 +15,17 @@ const CATEGORY_COLORS = {
 
 const DEFAULT_COLOR = "#c0392b"
 
+function parseWeight(name) {
+  const match = name.match(/(\d+(?:\.\d+)?\s?(?:kg|g|ml|l))\b/i)
+  return match ? match[1] : name
+}
+
 function ProductDetail() {
   const { slug }   = useParams()
   const navigate   = useNavigate()
   const [product,  setProduct]  = useState(null)
   const [category, setCategory] = useState(null)
+  const [variants, setVariants] = useState([])
   const [activeImg, setActiveImg] = useState(0)
   const [loading,  setLoading]  = useState(true)
 
@@ -40,6 +46,24 @@ function ProductDetail() {
     fetchProduct()
   }, [slug])
 
+  useEffect(() => {
+    async function fetchVariants() {
+      if (!product?.variantes || product.variantes.length === 0) {
+        setVariants([])
+        return
+      }
+      const { data, error } = await supabase
+        .from("productos")
+        .select("id, slug, name")
+        .in("id", product.variantes)
+
+      if (!error && data) {
+        setVariants(data)
+      }
+    }
+    fetchVariants()
+  }, [product])
+
   if (loading) {
     return (
       <div className="detail-loading">
@@ -58,9 +82,10 @@ function ProductDetail() {
   }
 
   const logo          = product.logo || null
-  const images        = (product.images && product.images.length > 0) ? product.images : [product.img]
+  const images        = (product.images && product.images.length > 0) ? product.images : []
   const categoryLabel = category?.label ?? ""
   const accent        = CATEGORY_COLORS[categoryLabel] ?? DEFAULT_COLOR  // ← color activo
+  const sizeOptions   = [{ id: product.id, slug: product.slug, name: product.name }, ...variants.filter((v) => v.id !== product.id)]
 
   return (
     <div className="detail-page" style={{ "--accent": accent }}>  {/* ← inyecta la variable */}
@@ -72,16 +97,16 @@ function ProductDetail() {
         <span>{product.name}</span>
       </nav>
 
-      {logo && (
-        <div className="detail-logo-section">
+      <div className="detail-logo-section">
+        {logo && (
           <img src={logo} alt={"Logo " + product.name} className="detail-logo" />
-        </div>
-      )}
+        )}
+      </div>
 
       <div className="detail-body">
         <div className="detail-gallery">
           <div className="detail-main-img">
-            <img src={images[activeImg]} alt={product.name} />
+            {images[activeImg] && <img src={images[activeImg]} alt={product.name} />}
           </div>
           {images.length > 1 && (
             <div className="detail-thumbs">
@@ -91,7 +116,7 @@ function ProductDetail() {
                   className={"detail-thumb" + (activeImg === i ? " active" : "")}
                   onClick={() => setActiveImg(i)}
                 >
-                  <img src={img} alt={product.name + " vista " + (i + 1)} />
+                  {img && <img src={img} alt={product.name + " vista " + (i + 1)} />}
                 </button>
               ))}
             </div>
@@ -100,6 +125,24 @@ function ProductDetail() {
 
         <div className="detail-info">
           {product.badge && <span className="detail-badge">{product.badge}</span>}
+
+          {sizeOptions.length > 1 && (
+            <div className="detail-variants">
+              <p className="detail-variants-label">Tamaño:</p>
+              <div className="detail-variants-list">
+                {sizeOptions.map((opt) => (
+                  <button
+                    key={opt.id}
+                    className={"detail-variant" + (opt.id === product.id ? " active" : "")}
+                    onClick={() => navigate("/productos/" + opt.slug)}
+                  >
+                    {parseWeight(opt.name)}
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
+
           <p className="detail-description">{product.description}</p>
         </div>
       </div>

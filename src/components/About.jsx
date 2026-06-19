@@ -7,7 +7,7 @@ function About() {
 
       <div className="about-image">
         <img
-          src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=700&q=80"
+          src="https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=700&q=80"
           alt="Ingredientes naturales"
         />
       </div>

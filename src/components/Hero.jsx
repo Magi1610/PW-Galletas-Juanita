@@ -5,7 +5,7 @@ function Hero() {
   return (
     <section id="inicio" className="hero">
       <div className="hero-content">
-        <div className="hero-badge">Tradición desde 1990</div>
+        <div className="hero-badge">Tradición desde 1985</div>
         <h1 className="hero-title">
           Pruebe lo nuestro,{' '}
           <span className="hero-animated-text">
@@ -32,7 +32,7 @@ function Hero() {
 
         <div className="hero-stats">
           <div className="hero-stat">
-            <span className="hero-stat-number">+30</span>
+            <span className="hero-stat-number">+40</span>
             <span className="hero-stat-label">Años de experiencia</span>
           </div>
           <div className="hero-stat-divider"></div>

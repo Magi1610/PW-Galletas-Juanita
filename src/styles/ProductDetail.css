@@ -240,3 +240,49 @@
   .detail-badge { font-size: 0.74rem; padding: 3px 12px; }
   .detail-description { font-size: 0.85rem; }
 }
+
+/* ── Selector de tamaños/variantes ── */
+.detail-variants {
+  margin-bottom: 28px;
+}
+
+.detail-variants-label {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #7a5c3e;
+  margin: 0 0 10px;
+}
+
+.detail-variants-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.detail-variant {
+  padding: 8px 18px;
+  border-radius: 999px;
+  border: 2px solid #e0d0bb;
+  background-color: #fff;
+  color: #3b1a08;
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.detail-variant:hover {
+  border-color: var(--accent);
+}
+
+.detail-variant.active {
+  border-color: var(--accent);
+  background-color: var(--accent);
+  color: white;
+}
+
+@media (max-width: 480px) {
+  .detail-variant { padding: 6px 14px; font-size: 0.8rem; }
+}

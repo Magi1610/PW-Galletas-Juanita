@@ -4,8 +4,9 @@ import { useProducts } from "../hooks/useProducts"
 import "../styles/Catalog.css"
 
 function ProductsCatalog() {
-  const { products, categories, loading, error } = useProducts()
+  const { products, categories, presentaciones, loading, error } = useProducts()
   const [activeCategory, setActiveCategory] = useState("")
+  const [activePresentacion, setActivePresentacion] = useState("all")
   const [search, setSearch] = useState("")
 
   useEffect(() => {
@@ -14,13 +15,28 @@ function ProductsCatalog() {
     }
   }, [categories])
 
+  useEffect(() => {
+    setActivePresentacion("all")
+  }, [activeCategory])
+
+  const presentacionTabs = useMemo(() => {
+    const idsInCategory = new Set(
+      products
+        .filter((p) => activeCategory === "all" || p.category === activeCategory)
+        .map((p) => p.presentacion)
+        .filter(Boolean)
+    )
+    return presentaciones.filter((pr) => idsInCategory.has(pr.id))
+  }, [products, presentaciones, activeCategory])
+
   const filtered = useMemo(() => {
     return products.filter((p) => {
       const matchCat    = activeCategory === "all" || p.category === activeCategory
+      const matchPres   = activePresentacion === "all" || p.presentacion === activePresentacion
       const matchSearch = p.name.toLowerCase().includes(search.toLowerCase())
-      return matchCat && matchSearch
+      return matchCat && matchPres && matchSearch
     })
-  }, [products, activeCategory, search])
+  }, [products, activeCategory, activePresentacion, search])
 
   const currentLabel = categories.find((c) => c.id === activeCategory)?.label ?? "Todas"
 
@@ -57,6 +73,26 @@ function ProductsCatalog() {
           </button>
         ))}
       </div>
+
+      {presentacionTabs.length > 0 && (
+        <div className="catalog-tabs catalog-tabs-secondary">
+          <button
+            className={"catalog-tab catalog-tab-sm" + (activePresentacion === "all" ? " active" : "")}
+            onClick={() => setActivePresentacion("all")}
+          >
+            Todas
+          </button>
+          {presentacionTabs.map((pres) => (
+            <button
+              key={pres.id}
+              className={"catalog-tab catalog-tab-sm" + (activePresentacion === pres.id ? " active" : "")}
+              onClick={() => setActivePresentacion(pres.id)}
+            >
+              {pres.label}
+            </button>
+          ))}
+        </div>
+      )}
 
       <div className="catalog-search-wrapper">
         <input
