@@ -1,4 +1,5 @@
 import '../styles/Hero.css'
+import { Link } from 'react-router-dom'
 import { TypeAnimation } from 'react-type-animation'
 
 function Hero() {
@@ -26,7 +27,7 @@ function Hero() {
           para acompañar tus mejores momentos.
         </p>
         <div className="hero-buttons">
-          <a href="#productos" className="hero-btn">Conoce nuestros productos →</a>
+          <Link to="/productos" className="hero-btn">Conoce nuestros productos →</Link>
           <a href="#contacto" className="hero-btn-outline">Contáctanos</a>
         </div>
 

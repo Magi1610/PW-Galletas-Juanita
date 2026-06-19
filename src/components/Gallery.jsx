@@ -4,16 +4,15 @@ import { Navigation, Pagination, Autoplay } from 'swiper/modules'
 import 'swiper/css'
 import 'swiper/css/navigation'
 import 'swiper/css/pagination'
-
-const images = [
-  { id: 1, src: 'https://images.unsplash.com/photo-1558961363-fa8fdf82db35?w=600&q=80', alt: 'Galletas en canasta' },
-  { id: 2, src: 'https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=600&q=80', alt: 'Ingredientes naturales' },
-  { id: 3, src: 'https://images.unsplash.com/photo-1612200747741-a8c6c423e7f7?w=600&q=80', alt: 'Galletas rellenas' },
-  { id: 4, src: 'https://images.unsplash.com/photo-1499636136210-6f4ee915583e?w=600&q=80', alt: 'Galletas de chispas' },
-  { id: 5, src: 'https://images.unsplash.com/photo-1606312619070-d48b4c652a52?w=600&q=80', alt: 'Galletas de chocolate' },
-]
+import { useGallery } from '../hooks/useGallery'
 
 function Gallery() {
+  const { images, loading, error } = useGallery()
+
+  if (loading || error || images.length === 0) {
+    return null
+  }
+
   return (
     <section id="galeria" className="gallery">
 
@@ -41,7 +40,7 @@ function Gallery() {
           {images.map((image) => (
             <SwiperSlide key={image.id}>
               <div className="gallery-slide">
-                <img src={image.src} alt={image.alt} />
+                <img src={image.url} alt={image.alt || 'Galletas Juanita'} />
               </div>
             </SwiperSlide>
           ))}
