@@ -1,5 +1,5 @@
 .about {
-  background-color: #fdf6ee;
+  background-color: #FFF7EC;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -31,7 +31,7 @@
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #c0392b;
+  color: #B71C1C;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -40,7 +40,7 @@
   font-family: var(--font-heading);
   font-size: 2.8rem;
   font-weight: 700;
-  color: #3b1a08;
+  color: #5C3A21;
   line-height: 1.2;
   margin: 10px 0 12px;
 }
@@ -48,21 +48,21 @@
 .about-underline {
   width: 50px;
   height: 3px;
-  background-color: #c9a84c;
+  background-color: #D4A017;
   margin-bottom: 20px;
 }
 
 .about-text {
   font-family: var(--font-body);
   font-size: 0.95rem;
-  color: #7a5c3e;
+  color: #8B4513;
   line-height: 1.8;
   margin-bottom: 32px;
 }
 
 .about-btn {
   display: inline-block;
-  background-color: #c0392b;
+  background-color: #B71C1C;
   color: white;
   padding: 13px 30px;
   border-radius: 999px;

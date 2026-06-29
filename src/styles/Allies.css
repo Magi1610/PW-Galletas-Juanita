@@ -1,5 +1,5 @@
 .allies {
-  background-color: #3b1a08;
+  background-color: #5C3A21;
   padding: 70px 60px;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #c9a84c;
+  color: #D4A017;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -31,7 +31,7 @@
 .allies-underline {
   width: 50px;
   height: 3px;
-  background-color: #c0392b;
+  background-color: #B71C1C;
   margin: 0 auto 16px;
 }
 
@@ -68,7 +68,7 @@
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
-  color: #c9a84c;
+  color: #D4A017;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -92,7 +92,7 @@
 }
 
 .allies-select:focus {
-  border-color: #c0392b;
+  border-color: #B71C1C;
   background-color: rgba(255,255,255,0.12);
 }
 
@@ -102,7 +102,7 @@
 }
 
 .allies-select option {
-  background-color: #3b1a08;
+  background-color: #5C3A21;
   color: #fff;
 }
 
@@ -141,7 +141,7 @@
 .allies-results-title {
   font-family: var(--font-body);
   font-size: 0.85rem;
-  color: #c9a84c;
+  color: #D4A017;
   font-weight: 600;
   margin-bottom: 16px;
   text-transform: uppercase;
@@ -167,8 +167,8 @@
 }
 
 .ally-store-card:hover {
-  background-color: rgba(192,57,43,0.25);
-  border-color: #c0392b;
+  background-color: rgba(183,28,28,0.25);
+  border-color: #B71C1C;
   transform: translateX(5px);
 }
 

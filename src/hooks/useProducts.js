@@ -15,7 +15,7 @@ export function useProducts() {
       setError(null)
 
       const [{ data: prods, error: e1 }, { data: cats, error: e2 }, { data: pres, error: e3 }] = await Promise.all([
-        supabase.from("productos").select("*, categorias(id, label), presentaciones(id, label, orden)").eq("activo", true).order("id"),
+        supabase.from("productos").select("*, categorias(id, label, logo), presentaciones(id, label, orden)").eq("activo", true).order("id"),
         supabase.from("categorias").select("*").order("orden"),
         supabase.from("presentaciones").select("*").order("orden"),
       ])

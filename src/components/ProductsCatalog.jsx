@@ -38,7 +38,9 @@ function ProductsCatalog() {
     })
   }, [products, activeCategory, activePresentacion, search])
 
-  const currentLabel = categories.find((c) => c.id === activeCategory)?.label ?? "Todas"
+  const currentCategory = categories.find((c) => c.id === activeCategory) ?? null
+  const currentLabel    = currentCategory?.label ?? "Todas"
+  const currentLogo     = currentCategory?.logo  ?? null
 
   if (loading) {
     return (
@@ -104,7 +106,16 @@ function ProductsCatalog() {
         />
       </div>
 
-      <h2 className="catalog-section-title">{currentLabel}</h2>
+      <h2 className={"catalog-section-title" + (currentLogo ? " catalog-section-title--logo" : "")}>
+        {currentLogo
+          ? (
+            <div className="catalog-section-logo-wrapper">
+              <img src={currentLogo} alt={currentLabel} className="catalog-section-logo" />
+            </div>
+          )
+          : currentLabel
+        }
+      </h2>
 
       {filtered.length === 0 ? (
         <p className="catalog-empty">No encontramos galletas con ese nombre</p>

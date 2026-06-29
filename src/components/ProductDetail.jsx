@@ -33,7 +33,7 @@ function ProductDetail() {
     async function fetchProduct() {
       const { data, error } = await supabase
         .from("productos")
-        .select("*, categorias(id, label)")
+        .select("*, categorias(id, label, logo)")
         .eq("slug", slug)
         .single()
 
@@ -81,7 +81,7 @@ function ProductDetail() {
     )
   }
 
-  const logo          = product.logo || null
+  const logo          = category?.logo || null
   const images        = (product.images && product.images.length > 0) ? product.images : []
   const categoryLabel = category?.label ?? ""
   const accent        = CATEGORY_COLORS[categoryLabel] ?? DEFAULT_COLOR  // ← color activo

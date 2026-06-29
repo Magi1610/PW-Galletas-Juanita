@@ -1,5 +1,5 @@
 .about-page {
-  background-color: #fdf6ee;
+  background-color: #FFF7EC;
   min-height: 100vh;
 }
 
@@ -7,7 +7,7 @@
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #c0392b;
+  color: #B71C1C;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -16,7 +16,7 @@
   font-family: var(--font-heading);
   font-size: 2.4rem;
   font-weight: 700;
-  color: #3b1a08;
+  color: #5C3A21;
   line-height: 1.2;
   margin: 10px 0 12px;
 }
@@ -24,14 +24,14 @@
 .about-page-underline {
   width: 50px;
   height: 3px;
-  background-color: #c9a84c;
+  background-color: #D4A017;
   margin-bottom: 24px;
 }
 
 .about-page-text {
   font-family: var(--font-body);
   font-size: 0.95rem;
-  color: #7a5c3e;
+  color: #8B4513;
   line-height: 1.8;
   margin-bottom: 16px;
 }
@@ -51,7 +51,7 @@
   font-family: var(--font-heading);
   font-size: 3rem;
   font-weight: 700;
-  color: #3b1a08;
+  color: #5C3A21;
   line-height: 1.2;
   margin: 10px 0 12px;
 }
@@ -59,7 +59,7 @@
 .about-hero-text {
   font-family: var(--font-body);
   font-size: 1rem;
-  color: #7a5c3e;
+  color: #8B4513;
   line-height: 1.8;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .about-mv-card {
-  background-color: #fff5f0;
+  background-color: #F5E9D6;
   border-radius: 16px;
   padding: 40px 32px;
   max-width: 420px;
@@ -119,14 +119,14 @@
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
-  color: #3b1a08;
+  color: #5C3A21;
   margin: 12px 0 14px;
 }
 
 .about-mv-text {
   font-family: var(--font-body);
   font-size: 0.92rem;
-  color: #7a5c3e;
+  color: #8B4513;
   line-height: 1.8;
 }
 
@@ -153,7 +153,7 @@
 
 .about-value-card {
   background-color: #fff;
-  border: 1px solid #f0e6d3;
+  border: 1px solid #F5E9D6;
   border-radius: 16px;
   padding: 32px 24px;
 }
@@ -162,14 +162,14 @@
   font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 700;
-  color: #c0392b;
+  color: #B71C1C;
   margin-bottom: 12px;
 }
 
 .about-value-text {
   font-family: var(--font-body);
   font-size: 0.9rem;
-  color: #7a5c3e;
+  color: #8B4513;
   line-height: 1.7;
 }
 
