@@ -1,5 +1,5 @@
-﻿import { useState, useEffect } from "react"
-import { supabase } from "../supabase"
+import { useState, useEffect } from "react"
+import { apiFetch } from "../services/api"
 import "../styles/Faq.css"
 
 function Faq() {
@@ -8,17 +8,17 @@ function Faq() {
   const [openId,  setOpenId]  = useState(null)
 
   useEffect(() => {
-    async function fetchFaqs() {
-      const { data, error } = await supabase
-        .from("faqs")
-        .select("*")
-        .eq("activo", true)
-        .order("orden")
-
-      if (!error) setFaqs(data)
-      setLoading(false)
+    async function load() {
+      try {
+        const data = await apiFetch("/api/faqs/")
+        setFaqs(data.results ?? data)
+      } catch {
+        // se queda vacío, la sección no se muestra
+      } finally {
+        setLoading(false)
+      }
     }
-    fetchFaqs()
+    load()
   }, [])
 
   const toggle = (id) => setOpenId(openId === id ? null : id)

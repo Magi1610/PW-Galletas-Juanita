@@ -1,32 +1,26 @@
 import { useState, useEffect } from "react"
-import { supabase } from "../supabase"
+import { apiFetch } from "../services/api"
 
 export function useGallery() {
 
-  const [images, setImages] = useState([])
+  const [images,  setImages]  = useState([])
   const [loading, setLoading] = useState(true)
-  const [error, setError] = useState(null)
+  const [error,   setError]   = useState(null)
 
   useEffect(() => {
-    async function fetch() {
+    async function load() {
       setLoading(true)
       setError(null)
-
-      const { data, error } = await supabase
-        .from("galeria")
-        .select("*")
-        .order("orden")
-
-      if (error) {
-        setError(error.message)
+      try {
+        const data = await apiFetch("/api/galeria/")
+        setImages(data.results ?? data)
+      } catch (e) {
+        setError(e.message)
+      } finally {
         setLoading(false)
-        return
       }
-
-      setImages(data)
-      setLoading(false)
     }
-    fetch()
+    load()
   }, [])
 
   return { images, loading, error }

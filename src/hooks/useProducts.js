@@ -1,37 +1,34 @@
-﻿import { useState, useEffect } from "react"
-import { supabase } from "../supabase"
+import { useState, useEffect } from "react"
+import { apiFetch } from "../services/api"
 
 export function useProducts() {
 
-  const [products,      setProducts]      = useState([])
-  const [categories,    setCategories]    = useState([])
+  const [products,       setProducts]       = useState([])
+  const [categories,     setCategories]     = useState([])
   const [presentaciones, setPresentaciones] = useState([])
-  const [loading,       setLoading]       = useState(true)
-  const [error,         setError]         = useState(null)
+  const [loading,        setLoading]        = useState(true)
+  const [error,          setError]          = useState(null)
 
   useEffect(() => {
-    async function fetch() {
+    async function load() {
       setLoading(true)
       setError(null)
-
-      const [{ data: prods, error: e1 }, { data: cats, error: e2 }, { data: pres, error: e3 }] = await Promise.all([
-        supabase.from("productos").select("*, categorias(id, label, logo), presentaciones(id, label, orden)").eq("activo", true).order("id"),
-        supabase.from("categorias").select("*").order("orden"),
-        supabase.from("presentaciones").select("*").order("orden"),
-      ])
-
-      if (e1 || e2 || e3) {
-        setError((e1 || e2 || e3).message)
+      try {
+        const [prods, cats, pres] = await Promise.all([
+          apiFetch("/api/products/"),
+          apiFetch("/api/categories/"),
+          apiFetch("/api/presentations/"),
+        ])
+        setProducts(prods.results ?? prods)
+        setCategories([{ id: "all", label: "Todas" }, ...(cats.results ?? cats)])
+        setPresentaciones(pres.results ?? pres)
+      } catch (e) {
+        setError(e.message)
+      } finally {
         setLoading(false)
-        return
       }
-
-      setProducts(prods)
-      setCategories([{ id: "all", label: "Todas" }, ...cats])
-      setPresentaciones(pres)
-      setLoading(false)
     }
-    fetch()
+    load()
   }, [])
 
   return { products, categories, presentaciones, loading, error }

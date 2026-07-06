@@ -22,8 +22,8 @@ function ProductsCatalog() {
   const presentacionTabs = useMemo(() => {
     const idsInCategory = new Set(
       products
-        .filter((p) => activeCategory === "all" || p.category === activeCategory)
-        .map((p) => p.presentacion)
+        .filter((p) => activeCategory === "all" || p.category?.id === activeCategory)
+        .map((p) => p.presentation?.id)
         .filter(Boolean)
     )
     return presentaciones.filter((pr) => idsInCategory.has(pr.id))
@@ -31,8 +31,8 @@ function ProductsCatalog() {
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
-      const matchCat    = activeCategory === "all" || p.category === activeCategory
-      const matchPres   = activePresentacion === "all" || p.presentacion === activePresentacion
+      const matchCat    = activeCategory === "all" || p.category?.id === activeCategory
+      const matchPres   = activePresentacion === "all" || p.presentation?.id === activePresentacion
       const matchSearch = p.name.toLowerCase().includes(search.toLowerCase())
       return matchCat && matchPres && matchSearch
     })

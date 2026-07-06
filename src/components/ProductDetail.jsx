@@ -1,6 +1,6 @@
-﻿import { useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import { useParams, useNavigate } from "react-router-dom"
-import { supabase } from "../supabase"
+import { apiFetch } from "../services/api"
 import "../styles/ProductDetail.css"
 
 const CATEGORY_COLORS = {
@@ -21,48 +21,25 @@ function parseWeight(name) {
 }
 
 function ProductDetail() {
-  const { slug }   = useParams()
-  const navigate   = useNavigate()
-  const [product,  setProduct]  = useState(null)
-  const [category, setCategory] = useState(null)
-  const [variants, setVariants] = useState([])
-  const [activeImg, setActiveImg] = useState(0)
-  const [loading,  setLoading]  = useState(true)
+  const { slug }  = useParams()
+  const navigate  = useNavigate()
+  const [product, setProduct] = useState(null)
+  const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    async function fetchProduct() {
-      const { data, error } = await supabase
-        .from("productos")
-        .select("*, categorias(id, label, logo)")
-        .eq("slug", slug)
-        .single()
-
-      if (!error && data) {
+    async function load() {
+      setLoading(true)
+      try {
+        const data = await apiFetch(`/api/products/${slug}/`)
         setProduct(data)
-        setCategory(data.categorias)
+      } catch {
+        setProduct(null)
+      } finally {
+        setLoading(false)
       }
-      setLoading(false)
     }
-    fetchProduct()
+    load()
   }, [slug])
-
-  useEffect(() => {
-    async function fetchVariants() {
-      if (!product?.variantes || product.variantes.length === 0) {
-        setVariants([])
-        return
-      }
-      const { data, error } = await supabase
-        .from("productos")
-        .select("id, slug, name")
-        .in("id", product.variantes)
-
-      if (!error && data) {
-        setVariants(data)
-      }
-    }
-    fetchVariants()
-  }, [product])
 
   if (loading) {
     return (
@@ -81,14 +58,17 @@ function ProductDetail() {
     )
   }
 
+  const category      = product.category
   const logo          = category?.logo || null
-  const images        = (product.images && product.images.length > 0) ? product.images : []
   const categoryLabel = category?.label ?? ""
-  const accent        = CATEGORY_COLORS[categoryLabel] ?? DEFAULT_COLOR  // ← color activo
-  const sizeOptions   = [{ id: product.id, slug: product.slug, name: product.name }, ...variants.filter((v) => v.id !== product.id)]
+  const accent        = CATEGORY_COLORS[categoryLabel] ?? DEFAULT_COLOR
+  const sizeOptions   = [
+    { id: product.id, slug: product.slug, name: product.name },
+    ...(product.variantes ?? []),
+  ]
 
   return (
-    <div className="detail-page" style={{ "--accent": accent }}>  {/* ← inyecta la variable */}
+    <div className="detail-page" style={{ "--accent": accent }}>
       <nav className="detail-breadcrumb">
         <button onClick={() => navigate("/productos")}>Productos</button>
         <span>/</span>
@@ -106,21 +86,8 @@ function ProductDetail() {
       <div className="detail-body">
         <div className="detail-gallery">
           <div className="detail-main-img">
-            {images[activeImg] && <img src={images[activeImg]} alt={product.name} />}
+            {product.img && <img src={product.img} alt={product.name} />}
           </div>
-          {images.length > 1 && (
-            <div className="detail-thumbs">
-              {images.map((img, i) => (
-                <button
-                  key={i}
-                  className={"detail-thumb" + (activeImg === i ? " active" : "")}
-                  onClick={() => setActiveImg(i)}
-                >
-                  {img && <img src={img} alt={product.name + " vista " + (i + 1)} />}
-                </button>
-              ))}
-            </div>
-          )}
         </div>
 
         <div className="detail-info">

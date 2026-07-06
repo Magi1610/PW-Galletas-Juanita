@@ -5,7 +5,7 @@ import markerIcon from "leaflet/dist/images/marker-icon.png"
 import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png"
 import markerShadow from "leaflet/dist/images/marker-shadow.png"
 import "leaflet/dist/leaflet.css"
-import { supabase } from "../supabase"
+import { apiFetch } from "../services/api"
 import "../styles/Allies.css"
 
 delete L.Icon.Default.prototype._getIconUrl
@@ -77,17 +77,17 @@ function Allies() {
   const [geoLoading,     setGeoLoading]     = useState(false)
 
   useEffect(() => {
-    async function fetchTiendas() {
-      const { data, error } = await supabase
-        .from("tiendas")
-        .select("*")
-        .eq("activo", true)
-        .order("estado")
-
-      if (!error) setAllData(data)
-      setLoading(false)
+    async function load() {
+      try {
+        const data = await apiFetch("/api/retailers/")
+        setAllData(data.results ?? data)
+      } catch {
+        // se queda vacío
+      } finally {
+        setLoading(false)
+      }
     }
-    fetchTiendas()
+    load()
   }, [])
 
   const states = useMemo(() => [...new Set(allData.map((t) => t.estado))], [allData])
