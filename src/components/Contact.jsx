@@ -1,11 +1,7 @@
-﻿import { useState } from "react"
-import emailjs from "@emailjs/browser"
+import { useState } from "react"
+import { apiFetch } from "../services/api"
 import { useDepartamentos } from "../hooks/useDepartamentos"
 import "../styles/Contact.css"
-
-const SERVICE_ID  = "service_bpshxh6"
-const TEMPLATE_ID = "template_o2uu1om"
-const PUBLIC_KEY  = "ZO1IFKOO1drMeGQ_j"
 
 function Contact() {
   const { departamentos, loading } = useDepartamentos()
@@ -15,10 +11,10 @@ function Contact() {
     departamento_id: "", asunto: "", mensaje: ""
   })
   const [status, setStatus] = useState("")
+  const [fieldErrors, setFieldErrors] = useState({})
 
   const selectedDept  = departamentos.find((d) => String(d.id) === form.departamento_id)
-  const asuntos       = selectedDept ? selectedDept.asuntos : []
-  const toEmail       = selectedDept ? selectedDept.email : ""
+  const asuntos       = selectedDept ? selectedDept.subjects : []
 
   const handleChange = (e) => {
     const { name, value } = e.target
@@ -35,21 +31,31 @@ function Contact() {
       return
     }
     setStatus("sending")
+    setFieldErrors({})
     try {
-      await emailjs.send(SERVICE_ID, TEMPLATE_ID, {
-        to_email:     toEmail,
-        nombre:       form.nombre,
-        email:        form.email,
-        telefono:     form.telefono || "No proporcionado",
-        ciudad:       form.ciudad   || "No proporcionada",
-        departamento: selectedDept?.nombre,
-        asunto:       form.asunto,
-        mensaje:      form.mensaje,
-      }, PUBLIC_KEY)
+      await apiFetch(`/api/departments/${form.departamento_id}/contact/`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          name:    form.nombre,
+          email:   form.email,
+          phone:   form.telefono,
+          city:    form.ciudad,
+          subject: Number(form.asunto),
+          message: form.mensaje,
+        }),
+      })
       setStatus("success")
       setForm({ nombre: "", email: "", telefono: "", ciudad: "", departamento_id: "", asunto: "", mensaje: "" })
-    } catch {
-      setStatus("failed")
+    } catch (e) {
+      if (e.status === 400 && e.data) {
+        setFieldErrors(e.data)
+        setStatus("validation")
+      } else if (e.status === 503) {
+        setStatus("unavailable")
+      } else {
+        setStatus("failed")
+      }
     }
   }
 
@@ -83,8 +89,7 @@ function Contact() {
               <span className="contact-icon">🏢</span>
               <div>
                 <p className="contact-dept-label">Tu mensaje ira a</p>
-                <p className="contact-dept-name">{selectedDept.nombre}</p>
-                <p className="contact-dept-email">{selectedDept.email}</p>
+                <p className="contact-dept-name">{selectedDept.name}</p>
               </div>
             </div>
           )}
@@ -108,14 +113,14 @@ function Contact() {
                 <select name="departamento_id" className="contact-select" value={form.departamento_id} onChange={handleChange}>
                   <option value="">Selecciona un departamento *</option>
                   {departamentos.map((d) => (
-                    <option key={d.id} value={String(d.id)}>{d.nombre}</option>
+                    <option key={d.id} value={String(d.id)}>{d.name}</option>
                   ))}
                 </select>
 
                 <select name="asunto" className="contact-select" value={form.asunto} onChange={handleChange} disabled={!form.departamento_id}>
                   <option value="">Selecciona un asunto *</option>
                   {asuntos.map((a) => (
-                    <option key={a.id} value={a.asunto}>{a.asunto}</option>
+                    <option key={a.id} value={String(a.id)}>{a.label}</option>
                   ))}
                 </select>
               </>
@@ -124,10 +129,16 @@ function Contact() {
 
           <textarea name="mensaje" placeholder="Mensaje *" className="contact-textarea" rows={5} value={form.mensaje} onChange={handleChange} />
 
-          {status === "success" && <p className="contact-msg success">Mensaje enviado correctamente</p>}
-          {status === "error"   && <p className="contact-msg error">Por favor llena todos los campos requeridos (*).</p>}
-          {status === "failed"  && <p className="contact-msg error">Hubo un error al enviar. Intentalo de nuevo.</p>}
-          {status === "sending" && <p className="contact-msg sending">Enviando...</p>}
+          {status === "success"     && <p className="contact-msg success">Mensaje enviado correctamente</p>}
+          {status === "error"       && <p className="contact-msg error">Por favor llena todos los campos requeridos (*).</p>}
+          {status === "validation"  && (
+            <p className="contact-msg error">
+              {Object.values(fieldErrors).flat().join(" ")}
+            </p>
+          )}
+          {status === "unavailable" && <p className="contact-msg error">Este departamento no tiene un correo de destino configurado. Intenta con otro departamento o mas tarde.</p>}
+          {status === "failed"      && <p className="contact-msg error">Hubo un error al enviar. Intentalo de nuevo.</p>}
+          {status === "sending"     && <p className="contact-msg sending">Enviando...</p>}
 
           <button className="contact-btn" onClick={handleSubmit} disabled={status === "sending"}>
             {status === "sending" ? "Enviando..." : "Enviar mensaje"}

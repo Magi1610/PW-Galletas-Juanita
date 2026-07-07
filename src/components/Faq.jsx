@@ -40,12 +40,12 @@ function Faq() {
           faqs.map((faq) => (
             <div key={faq.id} className={"faq-item" + (openId === faq.id ? " open" : "")}>
               <button className="faq-question" onClick={() => toggle(faq.id)}>
-                <span>{faq.pregunta}</span>
+                <span>{faq.question}</span>
                 <span className="faq-icon">{openId === faq.id ? "-" : "+"}</span>
               </button>
               {openId === faq.id && (
                 <div className="faq-answer">
-                  <p>{faq.respuesta}</p>
+                  <p>{faq.answer}</p>
                 </div>
               )}
             </div>

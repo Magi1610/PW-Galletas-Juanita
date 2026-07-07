@@ -15,7 +15,7 @@ export function useProducts() {
       setError(null)
       try {
         const [prods, cats, pres] = await Promise.all([
-          apiFetch("/api/products/"),
+          apiFetch("/api/store-mgmt/products/"),
           apiFetch("/api/categories/"),
           apiFetch("/api/presentations/"),
         ])

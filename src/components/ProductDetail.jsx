@@ -30,7 +30,7 @@ function ProductDetail() {
     async function load() {
       setLoading(true)
       try {
-        const data = await apiFetch(`/api/products/${slug}/`)
+        const data = await apiFetch(`/api/store-mgmt/products/${slug}/`)
         setProduct(data)
       } catch {
         setProduct(null)

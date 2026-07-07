@@ -12,7 +12,7 @@ export function useDepartamentos() {
       setLoading(true)
       setError(null)
       try {
-        const data = await apiFetch("/api/departamentos/")
+        const data = await apiFetch("/api/departments/")
         setDepartamentos(data.results ?? data)
       } catch (e) {
         setError(e.message)

@@ -90,17 +90,17 @@ function Allies() {
     load()
   }, [])
 
-  const states = useMemo(() => [...new Set(allData.map((t) => t.estado))], [allData])
+  const states = useMemo(() => [...new Set(allData.map((t) => t.state))], [allData])
 
   const cities = useMemo(() => (
     selectedState
-      ? [...new Set(allData.filter((t) => t.estado === selectedState).map((t) => t.municipio))]
+      ? [...new Set(allData.filter((t) => t.state === selectedState).map((t) => t.municipality))]
       : []
   ), [allData, selectedState])
 
   const stores = useMemo(() => (
     selectedState && selectedCity
-      ? allData.filter((t) => t.estado === selectedState && t.municipio === selectedCity)
+      ? allData.filter((t) => t.state === selectedState && t.municipality === selectedCity)
       : []
   ), [allData, selectedState, selectedCity])
 
@@ -122,7 +122,7 @@ function Allies() {
           continue
         }
 
-        const query = `${store.direccion}, ${store.municipio}, ${store.estado}, México`
+        const query = `${store.address}, ${store.municipality}, ${store.state}, México`
         const { coords, fromCache } = await geocodeAddress(query)
         if (cancelled) return
         if (coords) results.push({ ...store, lat: coords.lat, lng: coords.lng })
@@ -217,8 +217,8 @@ function Allies() {
                     <div key={store.id} className="ally-store-card">
                       <span className="ally-store-icon">🏪</span>
                       <div className="ally-store-info">
-                        <strong>{store.nombre}</strong>
-                        <span>{store.direccion}</span>
+                        <strong>{store.name}</strong>
+                        <span>{store.address}</span>
                       </div>
                     </div>
                   ))}
@@ -240,7 +240,7 @@ function Allies() {
                       {storeLocations.map((store) => (
                         <Marker key={store.id} position={[store.lat, store.lng]}>
                           <Popup>
-                            <strong>{store.nombre}</strong><br />{store.direccion}
+                            <strong>{store.name}</strong><br />{store.address}
                           </Popup>
                         </Marker>
                       ))}
