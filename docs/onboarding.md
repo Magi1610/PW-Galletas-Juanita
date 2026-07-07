@@ -18,20 +18,20 @@ Edita `.env` si tu backend no corre en `http://localhost:8000`.
 
 ### Variables de entorno
 
-| Variable | Descripción | Ejemplo |
-|---|---|---|
+| Variable       | Descripción                                                  | Ejemplo                 |
+| -------------- | ------------------------------------------------------------ | ----------------------- |
 | `VITE_API_URL` | URL base de la API (Cookiexpend-API) que consume el frontend | `http://localhost:8000` |
 
 `.env` está en `.gitignore` — nunca se commitea. Usa `.env.example` como plantilla.
 
 ## Comandos
 
-| Comando | Qué hace |
-|---|---|
-| `npm run dev` | Levanta el servidor de desarrollo de Vite con HMR |
-| `npm run build` | Build de producción a `dist/` |
-| `npm run preview` | Sirve el build de `dist/` localmente |
-| `npm run lint` | Corre ESLint sobre todo el proyecto |
+| Comando           | Qué hace                                          |
+| ----------------- | ------------------------------------------------- |
+| `npm run dev`     | Levanta el servidor de desarrollo de Vite con HMR |
+| `npm run build`   | Build de producción a `dist/`                     |
+| `npm run preview` | Sirve el build de `dist/` localmente              |
+| `npm run lint`    | Corre ESLint sobre todo el proyecto               |
 
 Tests automatizados (Vitest + React Testing Library) están en proceso de configurarse — todavía no hay `npm run test`. Hasta entonces, la verificación manual se apoya en `verify-changes.mjs` (screenshots con Playwright de las secciones principales contra un servidor de dev corriendo).
 
@@ -59,12 +59,12 @@ Al agregar un nuevo endpoint: crea o extiende un hook en `src/hooks/`, no llames
 
 Definidas en [src/App.jsx](../src/App.jsx):
 
-| Ruta | Componente |
-|---|---|
-| `/` | `Home` |
-| `/nosotros` | `AboutPage` |
-| `/productos` | `ProductsCatalog` |
-| `/productos/:slug` | `ProductDetail` |
+| Ruta               | Componente        |
+| ------------------ | ----------------- |
+| `/`                | `Home`            |
+| `/nosotros`        | `AboutPage`       |
+| `/productos`       | `ProductsCatalog` |
+| `/productos/:slug` | `ProductDetail`   |
 
 ## Flujo de ramas y PRs
 

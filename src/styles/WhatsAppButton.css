@@ -36,12 +36,23 @@
 }
 
 @keyframes waPulse {
-  0%   { box-shadow: 0 0 0 0 rgba(37,211,102,0.5); }
-  70%  { box-shadow: 0 0 0 14px rgba(37,211,102,0); }
-  100% { box-shadow: 0 0 0 0 rgba(37,211,102,0); }
+  0% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 14px rgba(37, 211, 102, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(37, 211, 102, 0);
+  }
 }
 
 @media (max-width: 480px) {
-  .wa-label { display: none; }
-  .wa-btn { padding: 14px; border-radius: 50%; }
+  .wa-label {
+    display: none;
+  }
+  .wa-btn {
+    padding: 14px;
+    border-radius: 50%;
+  }
 }

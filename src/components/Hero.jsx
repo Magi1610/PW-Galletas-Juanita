@@ -12,10 +12,14 @@ function Hero() {
           <span className="hero-animated-text">
             <TypeAnimation
               sequence={[
-                'hecho con amor ', 2000,
-                'hecho con tradición ', 2000,
-                'hecho con calidad ', 2000,
-                'hecho para ti ', 2000,
+                'hecho con amor ',
+                2000,
+                'hecho con tradición ',
+                2000,
+                'hecho con calidad ',
+                2000,
+                'hecho para ti ',
+                2000,
               ]}
               repeat={Infinity}
               speed={40}
@@ -23,12 +27,16 @@ function Hero() {
           </span>
         </h1>
         <p className="hero-subtitle">
-          Galletas crujientes, recetas tradicionales e ingredientes de calidad
-          para acompañar tus mejores momentos.
+          Galletas crujientes, recetas tradicionales e ingredientes de calidad para acompañar tus
+          mejores momentos.
         </p>
         <div className="hero-buttons">
-          <Link to="/productos" className="hero-btn">Conoce nuestros productos →</Link>
-          <a href="#contacto" className="hero-btn-outline">Contáctanos</a>
+          <Link to="/productos" className="hero-btn">
+            Conoce nuestros productos →
+          </Link>
+          <a href="#contacto" className="hero-btn-outline">
+            Contáctanos
+          </a>
         </div>
 
         <div className="hero-stats">

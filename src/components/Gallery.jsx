@@ -15,7 +15,6 @@ function Gallery() {
 
   return (
     <section id="galeria" className="gallery">
-
       <div className="gallery-header">
         <span className="gallery-label">GALERÍA</span>
         <h2 className="gallery-title">Momentos que saben bien</h2>
@@ -32,7 +31,7 @@ function Gallery() {
           autoplay={{ delay: 3000, disableOnInteraction: false }}
           loop={true}
           breakpoints={{
-            0:   { slidesPerView: 1 },
+            0: { slidesPerView: 1 },
             600: { slidesPerView: 2 },
             900: { slidesPerView: 3 },
           }}
@@ -46,7 +45,6 @@ function Gallery() {
           ))}
         </Swiper>
       </div>
-
     </section>
   )
 }

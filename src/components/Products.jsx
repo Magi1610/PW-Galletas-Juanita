@@ -1,11 +1,11 @@
-﻿import "../styles/Products.css"
-import { Swiper, SwiperSlide } from "swiper/react"
-import { Navigation, Pagination, Autoplay } from "swiper/modules"
-import "swiper/css"
-import "swiper/css/navigation"
-import "swiper/css/pagination"
-import { Link } from "react-router-dom"
-import { useProducts } from "../hooks/useProducts"
+﻿import '../styles/Products.css'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import { Navigation, Pagination, Autoplay } from 'swiper/modules'
+import 'swiper/css'
+import 'swiper/css/navigation'
+import 'swiper/css/pagination'
+import { Link } from 'react-router-dom'
+import { useProducts } from '../hooks/useProducts'
 
 function Products() {
   const { products, loading } = useProducts()
@@ -33,15 +33,15 @@ function Products() {
             autoplay={{ delay: 3000, disableOnInteraction: false }}
             loop={products.length > 1}
             breakpoints={{
-              0:    { slidesPerView: 1 },
-              480:  { slidesPerView: 2 },
-              768:  { slidesPerView: 3 },
+              0: { slidesPerView: 1 },
+              480: { slidesPerView: 2 },
+              768: { slidesPerView: 3 },
               1024: { slidesPerView: 4 },
             }}
           >
             {products.map((product) => (
               <SwiperSlide key={product.id}>
-                <Link to={"/productos/" + product.slug} className="product-card-link">
+                <Link to={'/productos/' + product.slug} className="product-card-link">
                   <div className="product-card">
                     <div className="product-img-wrapper">
                       <img src={product.img} alt={product.name} />
@@ -50,9 +50,7 @@ function Products() {
                       </div>
                     </div>
                     <p className="product-name">{product.name}</p>
-                    {product.badge && (
-                      <span className="product-badge">{product.badge}</span>
-                    )}
+                    {product.badge && <span className="product-badge">{product.badge}</span>}
                   </div>
                 </Link>
               </SwiperSlide>
@@ -61,7 +59,9 @@ function Products() {
         </div>
       )}
 
-      <Link to="/productos" className="products-btn">Ver todos los productos</Link>
+      <Link to="/productos" className="products-btn">
+        Ver todos los productos
+      </Link>
     </section>
   )
 }

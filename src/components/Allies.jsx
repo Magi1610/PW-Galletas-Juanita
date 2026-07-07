@@ -1,12 +1,12 @@
-import { useState, useEffect, useMemo } from "react"
-import { MapContainer, TileLayer, Marker, Popup, useMap } from "react-leaflet"
-import L from "leaflet"
-import markerIcon from "leaflet/dist/images/marker-icon.png"
-import markerIcon2x from "leaflet/dist/images/marker-icon-2x.png"
-import markerShadow from "leaflet/dist/images/marker-shadow.png"
-import "leaflet/dist/leaflet.css"
-import { apiFetch } from "../services/api"
-import "../styles/Allies.css"
+import { useState, useEffect, useMemo } from 'react'
+import { MapContainer, TileLayer, Marker, Popup, useMap } from 'react-leaflet'
+import L from 'leaflet'
+import markerIcon from 'leaflet/dist/images/marker-icon.png'
+import markerIcon2x from 'leaflet/dist/images/marker-icon-2x.png'
+import markerShadow from 'leaflet/dist/images/marker-shadow.png'
+import 'leaflet/dist/leaflet.css'
+import { apiFetch } from '../services/api'
+import '../styles/Allies.css'
 
 delete L.Icon.Default.prototype._getIconUrl
 L.Icon.Default.mergeOptions({
@@ -15,11 +15,11 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 })
 
-const GEOCODE_CACHE_KEY = "gj-geocode-cache"
+const GEOCODE_CACHE_KEY = 'gj-geocode-cache'
 
 function loadGeocodeCache() {
   try {
-    return new Map(Object.entries(JSON.parse(localStorage.getItem(GEOCODE_CACHE_KEY) || "{}")))
+    return new Map(Object.entries(JSON.parse(localStorage.getItem(GEOCODE_CACHE_KEY) || '{}')))
   } catch {
     return new Map()
   }
@@ -41,7 +41,7 @@ async function geocodeAddress(query) {
   }
   try {
     const res = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`
+      `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`,
     )
     const data = await res.json()
     const coords = data[0] ? { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) } : null
@@ -61,7 +61,10 @@ function FitBounds({ points }) {
     if (points.length === 1) {
       map.setView([points[0].lat, points[0].lng], 14)
     } else {
-      map.fitBounds(points.map((p) => [p.lat, p.lng]), { padding: [40, 40] })
+      map.fitBounds(
+        points.map((p) => [p.lat, p.lng]),
+        { padding: [40, 40] },
+      )
     }
   }, [points, map])
 
@@ -69,17 +72,17 @@ function FitBounds({ points }) {
 }
 
 function Allies() {
-  const [allData,        setAllData]        = useState([])
-  const [loading,        setLoading]        = useState(true)
-  const [selectedState,  setSelectedState]  = useState("")
-  const [selectedCity,   setSelectedCity]   = useState("")
+  const [allData, setAllData] = useState([])
+  const [loading, setLoading] = useState(true)
+  const [selectedState, setSelectedState] = useState('')
+  const [selectedCity, setSelectedCity] = useState('')
   const [storeLocations, setStoreLocations] = useState([])
-  const [geoLoading,     setGeoLoading]     = useState(false)
+  const [geoLoading, setGeoLoading] = useState(false)
 
   useEffect(() => {
     async function load() {
       try {
-        const data = await apiFetch("/api/retailers/")
+        const data = await apiFetch('/api/retailers/')
         setAllData(data.results ?? data)
       } catch {
         // se queda vacío
@@ -92,17 +95,21 @@ function Allies() {
 
   const states = useMemo(() => [...new Set(allData.map((t) => t.state))], [allData])
 
-  const cities = useMemo(() => (
-    selectedState
-      ? [...new Set(allData.filter((t) => t.state === selectedState).map((t) => t.municipality))]
-      : []
-  ), [allData, selectedState])
+  const cities = useMemo(
+    () =>
+      selectedState
+        ? [...new Set(allData.filter((t) => t.state === selectedState).map((t) => t.municipality))]
+        : [],
+    [allData, selectedState],
+  )
 
-  const stores = useMemo(() => (
-    selectedState && selectedCity
-      ? allData.filter((t) => t.state === selectedState && t.municipality === selectedCity)
-      : []
-  ), [allData, selectedState, selectedCity])
+  const stores = useMemo(
+    () =>
+      selectedState && selectedCity
+        ? allData.filter((t) => t.state === selectedState && t.municipality === selectedCity)
+        : [],
+    [allData, selectedState, selectedCity],
+  )
 
   useEffect(() => {
     let cancelled = false
@@ -136,12 +143,14 @@ function Allies() {
     }
 
     locateStores()
-    return () => { cancelled = true }
+    return () => {
+      cancelled = true
+    }
   }, [stores])
 
   const handleStateChange = (e) => {
     setSelectedState(e.target.value)
-    setSelectedCity("")
+    setSelectedCity('')
   }
 
   return (
@@ -167,7 +176,9 @@ function Allies() {
               <select className="allies-select" value={selectedState} onChange={handleStateChange}>
                 <option value="">Selecciona un estado</option>
                 {states.map((s) => (
-                  <option key={s} value={s}>{s}</option>
+                  <option key={s} value={s}>
+                    {s}
+                  </option>
                 ))}
               </select>
             </div>
@@ -182,7 +193,9 @@ function Allies() {
               >
                 <option value="">Selecciona un municipio</option>
                 {cities.map((c) => (
-                  <option key={c} value={c}>{c}</option>
+                  <option key={c} value={c}>
+                    {c}
+                  </option>
                 ))}
               </select>
             </div>
@@ -210,7 +223,7 @@ function Allies() {
             {stores.length > 0 && (
               <div className="allies-stores">
                 <p className="allies-results-title">
-                  {stores.length} punto{stores.length > 1 ? "s" : ""} de venta en {selectedCity}
+                  {stores.length} punto{stores.length > 1 ? 's' : ''} de venta en {selectedCity}
                 </p>
                 <div className="allies-stores-grid">
                   {stores.map((store) => (
@@ -240,14 +253,18 @@ function Allies() {
                       {storeLocations.map((store) => (
                         <Marker key={store.id} position={[store.lat, store.lng]}>
                           <Popup>
-                            <strong>{store.name}</strong><br />{store.address}
+                            <strong>{store.name}</strong>
+                            <br />
+                            {store.address}
                           </Popup>
                         </Marker>
                       ))}
                     </MapContainer>
                   ) : (
                     <div className="allies-map-loading">
-                      {geoLoading ? "Ubicando los locales en el mapa..." : "No pudimos ubicar estos locales en el mapa."}
+                      {geoLoading
+                        ? 'Ubicando los locales en el mapa...'
+                        : 'No pudimos ubicar estos locales en el mapa.'}
                     </div>
                   )}
                 </div>

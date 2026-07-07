@@ -1,46 +1,43 @@
-﻿import { useState, useMemo, useEffect } from "react"
-import { Link } from "react-router-dom"
-import { useProducts } from "../hooks/useProducts"
-import "../styles/Catalog.css"
+﻿import { useState, useMemo } from 'react'
+import { Link } from 'react-router-dom'
+import { useProducts } from '../hooks/useProducts'
+import '../styles/Catalog.css'
 
 function ProductsCatalog() {
   const { products, categories, presentaciones, loading, error } = useProducts()
-  const [activeCategory, setActiveCategory] = useState("")
-  const [activePresentacion, setActivePresentacion] = useState("all")
-  const [search, setSearch] = useState("")
+  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [activePresentacion, setActivePresentacion] = useState('all')
+  const [search, setSearch] = useState('')
 
-  useEffect(() => {
-    if (categories.length > 1 && !activeCategory) {
-      setActiveCategory(categories[1].id)
-    }
-  }, [categories])
+  const activeCategory = selectedCategory ?? categories[1]?.id ?? ''
 
-  useEffect(() => {
-    setActivePresentacion("all")
-  }, [activeCategory])
+  function handleCategoryChange(id) {
+    setSelectedCategory(id)
+    setActivePresentacion('all')
+  }
 
   const presentacionTabs = useMemo(() => {
     const idsInCategory = new Set(
       products
-        .filter((p) => activeCategory === "all" || p.category?.id === activeCategory)
+        .filter((p) => activeCategory === 'all' || p.category?.id === activeCategory)
         .map((p) => p.presentation?.id)
-        .filter(Boolean)
+        .filter(Boolean),
     )
     return presentaciones.filter((pr) => idsInCategory.has(pr.id))
   }, [products, presentaciones, activeCategory])
 
   const filtered = useMemo(() => {
     return products.filter((p) => {
-      const matchCat    = activeCategory === "all" || p.category?.id === activeCategory
-      const matchPres   = activePresentacion === "all" || p.presentation?.id === activePresentacion
+      const matchCat = activeCategory === 'all' || p.category?.id === activeCategory
+      const matchPres = activePresentacion === 'all' || p.presentation?.id === activePresentacion
       const matchSearch = p.name.toLowerCase().includes(search.toLowerCase())
       return matchCat && matchPres && matchSearch
     })
   }, [products, activeCategory, activePresentacion, search])
 
   const currentCategory = categories.find((c) => c.id === activeCategory) ?? null
-  const currentLabel    = currentCategory?.label ?? "Todas"
-  const currentLogo     = currentCategory?.logo  ?? null
+  const currentLabel = currentCategory?.label ?? 'Todas'
+  const currentLogo = currentCategory?.logo ?? null
 
   if (loading) {
     return (
@@ -54,22 +51,19 @@ function ProductsCatalog() {
   if (error) {
     return (
       <div className="catalog-loading">
-        <p style={{ color: "#c0392b" }}>
-          Error al cargar productos: {error}
-        </p>
+        <p style={{ color: '#c0392b' }}>Error al cargar productos: {error}</p>
       </div>
     )
   }
 
   return (
     <div className="catalog-page">
-
       <div className="catalog-tabs">
         {categories.map((cat) => (
           <button
             key={cat.id}
-            className={"catalog-tab" + (activeCategory === cat.id ? " active" : "")}
-            onClick={() => setActiveCategory(cat.id)}
+            className={'catalog-tab' + (activeCategory === cat.id ? ' active' : '')}
+            onClick={() => handleCategoryChange(cat.id)}
           >
             {cat.label}
           </button>
@@ -79,15 +73,19 @@ function ProductsCatalog() {
       {presentacionTabs.length > 0 && (
         <div className="catalog-tabs catalog-tabs-secondary">
           <button
-            className={"catalog-tab catalog-tab-sm" + (activePresentacion === "all" ? " active" : "")}
-            onClick={() => setActivePresentacion("all")}
+            className={
+              'catalog-tab catalog-tab-sm' + (activePresentacion === 'all' ? ' active' : '')
+            }
+            onClick={() => setActivePresentacion('all')}
           >
             Todas
           </button>
           {presentacionTabs.map((pres) => (
             <button
               key={pres.id}
-              className={"catalog-tab catalog-tab-sm" + (activePresentacion === pres.id ? " active" : "")}
+              className={
+                'catalog-tab catalog-tab-sm' + (activePresentacion === pres.id ? ' active' : '')
+              }
               onClick={() => setActivePresentacion(pres.id)}
             >
               {pres.label}
@@ -106,15 +104,14 @@ function ProductsCatalog() {
         />
       </div>
 
-      <h2 className={"catalog-section-title" + (currentLogo ? " catalog-section-title--logo" : "")}>
-        {currentLogo
-          ? (
-            <div className="catalog-section-logo-wrapper">
-              <img src={currentLogo} alt={currentLabel} className="catalog-section-logo" />
-            </div>
-          )
-          : currentLabel
-        }
+      <h2 className={'catalog-section-title' + (currentLogo ? ' catalog-section-title--logo' : '')}>
+        {currentLogo ? (
+          <div className="catalog-section-logo-wrapper">
+            <img src={currentLogo} alt={currentLabel} className="catalog-section-logo" />
+          </div>
+        ) : (
+          currentLabel
+        )}
       </h2>
 
       {filtered.length === 0 ? (
@@ -129,7 +126,7 @@ function ProductsCatalog() {
               </div>
               <div className="catalog-card-body">
                 <p className="catalog-card-name">{product.name}</p>
-                <Link to={"/productos/" + product.slug} className="catalog-card-btn">
+                <Link to={'/productos/' + product.slug} className="catalog-card-btn">
                   Ver producto
                 </Link>
               </div>
@@ -137,7 +134,6 @@ function ProductsCatalog() {
           ))}
         </div>
       )}
-
     </div>
   )
 }

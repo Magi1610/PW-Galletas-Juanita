@@ -1,16 +1,16 @@
-import { useState, useEffect } from "react"
-import { apiFetch } from "../services/api"
-import "../styles/Faq.css"
+import { useState, useEffect } from 'react'
+import { apiFetch } from '../services/api'
+import '../styles/Faq.css'
 
 function Faq() {
-  const [faqs,    setFaqs]    = useState([])
+  const [faqs, setFaqs] = useState([])
   const [loading, setLoading] = useState(true)
-  const [openId,  setOpenId]  = useState(null)
+  const [openId, setOpenId] = useState(null)
 
   useEffect(() => {
     async function load() {
       try {
-        const data = await apiFetch("/api/faqs/")
+        const data = await apiFetch('/api/faqs/')
         setFaqs(data.results ?? data)
       } catch {
         // se queda vacío, la sección no se muestra
@@ -38,10 +38,10 @@ function Faq() {
           </div>
         ) : (
           faqs.map((faq) => (
-            <div key={faq.id} className={"faq-item" + (openId === faq.id ? " open" : "")}>
+            <div key={faq.id} className={'faq-item' + (openId === faq.id ? ' open' : '')}>
               <button className="faq-question" onClick={() => toggle(faq.id)}>
                 <span>{faq.question}</span>
-                <span className="faq-icon">{openId === faq.id ? "-" : "+"}</span>
+                <span className="faq-icon">{openId === faq.id ? '-' : '+'}</span>
               </button>
               {openId === faq.id && (
                 <div className="faq-answer">

@@ -1,25 +1,30 @@
-import { useState } from "react"
-import { apiFetch } from "../services/api"
-import { useDepartamentos } from "../hooks/useDepartamentos"
-import "../styles/Contact.css"
+import { useState } from 'react'
+import { apiFetch } from '../services/api'
+import { useDepartamentos } from '../hooks/useDepartamentos'
+import '../styles/Contact.css'
 
 function Contact() {
   const { departamentos, loading } = useDepartamentos()
 
   const [form, setForm] = useState({
-    nombre: "", email: "", telefono: "", ciudad: "",
-    departamento_id: "", asunto: "", mensaje: ""
+    nombre: '',
+    email: '',
+    telefono: '',
+    ciudad: '',
+    departamento_id: '',
+    asunto: '',
+    mensaje: '',
   })
-  const [status, setStatus] = useState("")
+  const [status, setStatus] = useState('')
   const [fieldErrors, setFieldErrors] = useState({})
 
-  const selectedDept  = departamentos.find((d) => String(d.id) === form.departamento_id)
-  const asuntos       = selectedDept ? selectedDept.subjects : []
+  const selectedDept = departamentos.find((d) => String(d.id) === form.departamento_id)
+  const asuntos = selectedDept ? selectedDept.subjects : []
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    if (name === "departamento_id") {
-      setForm({ ...form, departamento_id: value, asunto: "" })
+    if (name === 'departamento_id') {
+      setForm({ ...form, departamento_id: value, asunto: '' })
     } else {
       setForm({ ...form, [name]: value })
     }
@@ -27,34 +32,42 @@ function Contact() {
 
   const handleSubmit = async () => {
     if (!form.nombre || !form.email || !form.departamento_id || !form.asunto || !form.mensaje) {
-      setStatus("error")
+      setStatus('error')
       return
     }
-    setStatus("sending")
+    setStatus('sending')
     setFieldErrors({})
     try {
       await apiFetch(`/api/departments/${form.departamento_id}/contact/`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          name:    form.nombre,
-          email:   form.email,
-          phone:   form.telefono,
-          city:    form.ciudad,
+          name: form.nombre,
+          email: form.email,
+          phone: form.telefono,
+          city: form.ciudad,
           subject: Number(form.asunto),
           message: form.mensaje,
         }),
       })
-      setStatus("success")
-      setForm({ nombre: "", email: "", telefono: "", ciudad: "", departamento_id: "", asunto: "", mensaje: "" })
+      setStatus('success')
+      setForm({
+        nombre: '',
+        email: '',
+        telefono: '',
+        ciudad: '',
+        departamento_id: '',
+        asunto: '',
+        mensaje: '',
+      })
     } catch (e) {
       if (e.status === 400 && e.data) {
         setFieldErrors(e.data)
-        setStatus("validation")
+        setStatus('validation')
       } else if (e.status === 503) {
-        setStatus("unavailable")
+        setStatus('unavailable')
       } else {
-        setStatus("failed")
+        setStatus('failed')
       }
     }
   }
@@ -68,12 +81,17 @@ function Contact() {
       </div>
 
       <div className="contact-body">
-
         <div className="contact-info">
           <h3>Informacion de contacto</h3>
           <div className="contact-info-item">
             <span className="contact-icon">📍</span>
-            <p>Galletas Juanita<br />Calle Maestros 10, San Pedro Atzompa<br />Tecamac, 55770, Mexico</p>
+            <p>
+              Galletas Juanita
+              <br />
+              Calle Maestros 10, San Pedro Atzompa
+              <br />
+              Tecamac, 55770, Mexico
+            </p>
           </div>
           <div className="contact-info-item">
             <span className="contact-icon">📞</span>
@@ -97,12 +115,40 @@ function Contact() {
 
         <div className="contact-form">
           <div className="contact-row">
-            <input type="text"  name="nombre"  placeholder="Nombre completo *"    className="contact-input" value={form.nombre}  onChange={handleChange} />
-            <input type="email" name="email"   placeholder="Correo electronico *" className="contact-input" value={form.email}   onChange={handleChange} />
+            <input
+              type="text"
+              name="nombre"
+              placeholder="Nombre completo *"
+              className="contact-input"
+              value={form.nombre}
+              onChange={handleChange}
+            />
+            <input
+              type="email"
+              name="email"
+              placeholder="Correo electronico *"
+              className="contact-input"
+              value={form.email}
+              onChange={handleChange}
+            />
           </div>
           <div className="contact-row">
-            <input type="tel"  name="telefono" placeholder="Telefono"             className="contact-input" value={form.telefono} onChange={handleChange} />
-            <input type="text" name="ciudad"   placeholder="Ciudad"               className="contact-input" value={form.ciudad}   onChange={handleChange} />
+            <input
+              type="tel"
+              name="telefono"
+              placeholder="Telefono"
+              className="contact-input"
+              value={form.telefono}
+              onChange={handleChange}
+            />
+            <input
+              type="text"
+              name="ciudad"
+              placeholder="Ciudad"
+              className="contact-input"
+              value={form.ciudad}
+              onChange={handleChange}
+            />
           </div>
 
           <div className="contact-select-group">
@@ -110,38 +156,69 @@ function Contact() {
               <p className="contact-loading-text">Cargando departamentos...</p>
             ) : (
               <>
-                <select name="departamento_id" className="contact-select" value={form.departamento_id} onChange={handleChange}>
+                <select
+                  name="departamento_id"
+                  className="contact-select"
+                  value={form.departamento_id}
+                  onChange={handleChange}
+                >
                   <option value="">Selecciona un departamento *</option>
                   {departamentos.map((d) => (
-                    <option key={d.id} value={String(d.id)}>{d.name}</option>
+                    <option key={d.id} value={String(d.id)}>
+                      {d.name}
+                    </option>
                   ))}
                 </select>
 
-                <select name="asunto" className="contact-select" value={form.asunto} onChange={handleChange} disabled={!form.departamento_id}>
+                <select
+                  name="asunto"
+                  className="contact-select"
+                  value={form.asunto}
+                  onChange={handleChange}
+                  disabled={!form.departamento_id}
+                >
                   <option value="">Selecciona un asunto *</option>
                   {asuntos.map((a) => (
-                    <option key={a.id} value={String(a.id)}>{a.label}</option>
+                    <option key={a.id} value={String(a.id)}>
+                      {a.label}
+                    </option>
                   ))}
                 </select>
               </>
             )}
           </div>
 
-          <textarea name="mensaje" placeholder="Mensaje *" className="contact-textarea" rows={5} value={form.mensaje} onChange={handleChange} />
+          <textarea
+            name="mensaje"
+            placeholder="Mensaje *"
+            className="contact-textarea"
+            rows={5}
+            value={form.mensaje}
+            onChange={handleChange}
+          />
 
-          {status === "success"     && <p className="contact-msg success">Mensaje enviado correctamente</p>}
-          {status === "error"       && <p className="contact-msg error">Por favor llena todos los campos requeridos (*).</p>}
-          {status === "validation"  && (
+          {status === 'success' && (
+            <p className="contact-msg success">Mensaje enviado correctamente</p>
+          )}
+          {status === 'error' && (
+            <p className="contact-msg error">Por favor llena todos los campos requeridos (*).</p>
+          )}
+          {status === 'validation' && (
+            <p className="contact-msg error">{Object.values(fieldErrors).flat().join(' ')}</p>
+          )}
+          {status === 'unavailable' && (
             <p className="contact-msg error">
-              {Object.values(fieldErrors).flat().join(" ")}
+              Este departamento no tiene un correo de destino configurado. Intenta con otro
+              departamento o mas tarde.
             </p>
           )}
-          {status === "unavailable" && <p className="contact-msg error">Este departamento no tiene un correo de destino configurado. Intenta con otro departamento o mas tarde.</p>}
-          {status === "failed"      && <p className="contact-msg error">Hubo un error al enviar. Intentalo de nuevo.</p>}
-          {status === "sending"     && <p className="contact-msg sending">Enviando...</p>}
+          {status === 'failed' && (
+            <p className="contact-msg error">Hubo un error al enviar. Intentalo de nuevo.</p>
+          )}
+          {status === 'sending' && <p className="contact-msg sending">Enviando...</p>}
 
-          <button className="contact-btn" onClick={handleSubmit} disabled={status === "sending"}>
-            {status === "sending" ? "Enviando..." : "Enviar mensaje"}
+          <button className="contact-btn" onClick={handleSubmit} disabled={status === 'sending'}>
+            {status === 'sending' ? 'Enviando...' : 'Enviar mensaje'}
           </button>
         </div>
 
@@ -155,7 +232,6 @@ function Contact() {
             loading="lazy"
           />
         </div>
-
       </div>
     </section>
   )
