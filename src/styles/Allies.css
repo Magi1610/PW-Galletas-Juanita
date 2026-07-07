@@ -1,5 +1,5 @@
 .allies {
-  background-color: #5C3A21;
+  background-color: #5c3a21;
   padding: 70px 60px;
   display: flex;
   flex-direction: column;
@@ -15,7 +15,7 @@
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #D4A017;
+  color: #d4a017;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -31,7 +31,7 @@
 .allies-underline {
   width: 50px;
   height: 3px;
-  background-color: #B71C1C;
+  background-color: #b71c1c;
   margin: 0 auto 16px;
 }
 
@@ -68,7 +68,7 @@
   font-family: var(--font-body);
   font-size: 0.8rem;
   font-weight: 600;
-  color: #D4A017;
+  color: #d4a017;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
@@ -76,8 +76,8 @@
 .allies-select {
   padding: 13px 18px;
   border-radius: 10px;
-  border: 1px solid rgba(255,255,255,0.2);
-  background-color: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  background-color: rgba(255, 255, 255, 0.08);
   color: #fff;
   font-family: var(--font-body);
   font-size: 0.92rem;
@@ -92,8 +92,8 @@
 }
 
 .allies-select:focus {
-  border-color: #B71C1C;
-  background-color: rgba(255,255,255,0.12);
+  border-color: #b71c1c;
+  background-color: rgba(255, 255, 255, 0.12);
 }
 
 .allies-select:disabled {
@@ -102,7 +102,7 @@
 }
 
 .allies-select option {
-  background-color: #5C3A21;
+  background-color: #5c3a21;
   color: #fff;
 }
 
@@ -130,7 +130,7 @@
 .allies-empty p {
   font-family: var(--font-body);
   font-size: 0.95rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
 }
 
 /* Tiendas */
@@ -141,7 +141,7 @@
 .allies-results-title {
   font-family: var(--font-body);
   font-size: 0.85rem;
-  color: #D4A017;
+  color: #d4a017;
   font-weight: 600;
   margin-bottom: 16px;
   text-transform: uppercase;
@@ -158,8 +158,8 @@
   display: flex;
   align-items: center;
   gap: 16px;
-  background-color: rgba(255,255,255,0.07);
-  border: 1px solid rgba(255,255,255,0.12);
+  background-color: rgba(255, 255, 255, 0.07);
+  border: 1px solid rgba(255, 255, 255, 0.12);
   border-radius: 12px;
   padding: 16px 20px;
   transition: all 0.2s;
@@ -167,8 +167,8 @@
 }
 
 .ally-store-card:hover {
-  background-color: rgba(183,28,28,0.25);
-  border-color: #B71C1C;
+  background-color: rgba(183, 28, 28, 0.25);
+  border-color: #b71c1c;
   transform: translateX(5px);
 }
 
@@ -193,12 +193,18 @@
 .ally-store-info span {
   font-family: var(--font-body);
   font-size: 0.82rem;
-  color: rgba(255,255,255,0.6);
+  color: rgba(255, 255, 255, 0.6);
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(8px); }
-  to   { opacity: 1; transform: translateY(0); }
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
 
 /* Mapa */
@@ -206,7 +212,7 @@
   margin-top: 20px;
   border-radius: 12px;
   overflow: hidden;
-  border: 1px solid rgba(255,255,255,0.12);
+  border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
 .allies-map {
@@ -219,31 +225,46 @@
   align-items: center;
   justify-content: center;
   height: 320px;
-  background-color: rgba(255,255,255,0.05);
+  background-color: rgba(255, 255, 255, 0.05);
   font-family: var(--font-body);
   font-size: 0.85rem;
-  color: rgba(255,255,255,0.5);
+  color: rgba(255, 255, 255, 0.5);
   text-align: center;
   padding: 0 20px;
 }
 
 /* ── Tablet (≤1024px) ── */
 @media (max-width: 1024px) {
-  .allies { padding: 50px 32px; }
+  .allies {
+    padding: 50px 32px;
+  }
 }
 
 /* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
-  .allies { padding: 50px 24px; }
-  .allies-title { font-size: 1.8rem; }
-  .ally-store-card:hover { transform: none; }
+  .allies {
+    padding: 50px 24px;
+  }
+  .allies-title {
+    font-size: 1.8rem;
+  }
+  .ally-store-card:hover {
+    transform: none;
+  }
 }
 
 /* ── Móvil pequeño (≤480px) ── */
 @media (max-width: 480px) {
-  .allies { padding: 40px 16px; }
-  .allies-title { font-size: 1.6rem; }
-  .allies-select-wrapper { min-width: unset; width: 100%; }
+  .allies {
+    padding: 40px 16px;
+  }
+  .allies-title {
+    font-size: 1.6rem;
+  }
+  .allies-select-wrapper {
+    min-width: unset;
+    width: 100%;
+  }
 }
 
 .allies-loading {
@@ -255,12 +276,14 @@
 .allies-spinner {
   width: 36px;
   height: 36px;
-  border: 3px solid rgba(255,255,255,0.2);
+  border: 3px solid rgba(255, 255, 255, 0.2);
   border-top-color: #fff;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
 }
 
 @keyframes spin {
-  to { transform: rotate(360deg); }
+  to {
+    transform: rotate(360deg);
+  }
 }

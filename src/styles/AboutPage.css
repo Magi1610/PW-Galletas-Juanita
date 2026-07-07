@@ -1,5 +1,5 @@
 .about-page {
-  background-color: #FFF7EC;
+  background-color: #fff7ec;
   min-height: 100vh;
 }
 
@@ -7,7 +7,7 @@
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #B71C1C;
+  color: #b71c1c;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -16,7 +16,7 @@
   font-family: var(--font-heading);
   font-size: 2.4rem;
   font-weight: 700;
-  color: #5C3A21;
+  color: #5c3a21;
   line-height: 1.2;
   margin: 10px 0 12px;
 }
@@ -24,14 +24,14 @@
 .about-page-underline {
   width: 50px;
   height: 3px;
-  background-color: #D4A017;
+  background-color: #d4a017;
   margin-bottom: 24px;
 }
 
 .about-page-text {
   font-family: var(--font-body);
   font-size: 0.95rem;
-  color: #8B4513;
+  color: #8b4513;
   line-height: 1.8;
   margin-bottom: 16px;
 }
@@ -51,7 +51,7 @@
   font-family: var(--font-heading);
   font-size: 3rem;
   font-weight: 700;
-  color: #5C3A21;
+  color: #5c3a21;
   line-height: 1.2;
   margin: 10px 0 12px;
 }
@@ -59,7 +59,7 @@
 .about-hero-text {
   font-family: var(--font-body);
   font-size: 1rem;
-  color: #8B4513;
+  color: #8b4513;
   line-height: 1.8;
 }
 
@@ -102,7 +102,7 @@
 }
 
 .about-mv-card {
-  background-color: #F5E9D6;
+  background-color: #f5e9d6;
   border-radius: 16px;
   padding: 40px 32px;
   max-width: 420px;
@@ -119,14 +119,14 @@
   font-family: var(--font-heading);
   font-size: 1.5rem;
   font-weight: 700;
-  color: #5C3A21;
+  color: #5c3a21;
   margin: 12px 0 14px;
 }
 
 .about-mv-text {
   font-family: var(--font-body);
   font-size: 0.92rem;
-  color: #8B4513;
+  color: #8b4513;
   line-height: 1.8;
 }
 
@@ -153,7 +153,7 @@
 
 .about-value-card {
   background-color: #fff;
-  border: 1px solid #F5E9D6;
+  border: 1px solid #f5e9d6;
   border-radius: 16px;
   padding: 32px 24px;
 }
@@ -162,14 +162,14 @@
   font-family: var(--font-heading);
   font-size: 1.2rem;
   font-weight: 700;
-  color: #B71C1C;
+  color: #b71c1c;
   margin-bottom: 12px;
 }
 
 .about-value-text {
   font-family: var(--font-body);
   font-size: 0.9rem;
-  color: #8B4513;
+  color: #8b4513;
   line-height: 1.7;
 }
 
@@ -188,36 +188,69 @@
 
 /* ── Tablet (≤1024px) ── */
 @media (max-width: 1024px) {
-  .about-hero { padding: 70px 40px 50px; }
-  .about-history { padding: 30px 40px 60px; gap: 40px; }
-  .about-mv { padding: 0 40px 60px; }
-  .about-values { padding: 0 40px 60px; }
-  .about-location { padding: 0 40px 70px; }
-  .about-values-grid { grid-template-columns: repeat(2, 1fr); }
+  .about-hero {
+    padding: 70px 40px 50px;
+  }
+  .about-history {
+    padding: 30px 40px 60px;
+    gap: 40px;
+  }
+  .about-mv {
+    padding: 0 40px 60px;
+  }
+  .about-values {
+    padding: 0 40px 60px;
+  }
+  .about-location {
+    padding: 0 40px 70px;
+  }
+  .about-values-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }
 
 /* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
-  .about-hero { padding: 50px 24px 40px; }
-  .about-hero-title { font-size: 2.2rem; }
+  .about-hero {
+    padding: 50px 24px 40px;
+  }
+  .about-hero-title {
+    font-size: 2.2rem;
+  }
 
   .about-history {
     flex-direction: column;
     padding: 40px 24px;
     text-align: center;
   }
-  .about-history-image img { height: 280px; }
+  .about-history-image img {
+    height: 280px;
+  }
 
-  .about-mv { padding: 0 24px 50px; }
-  .about-values { padding: 0 24px 50px; }
-  .about-location { padding: 0 24px 60px; }
+  .about-mv {
+    padding: 0 24px 50px;
+  }
+  .about-values {
+    padding: 0 24px 50px;
+  }
+  .about-location {
+    padding: 0 24px 60px;
+  }
 
-  .about-page-title { font-size: 1.9rem; }
-  .about-values-grid { grid-template-columns: 1fr; }
+  .about-page-title {
+    font-size: 1.9rem;
+  }
+  .about-values-grid {
+    grid-template-columns: 1fr;
+  }
 }
 
 /* ── Móvil pequeño (≤480px) ── */
 @media (max-width: 480px) {
-  .about-hero-title { font-size: 1.8rem; }
-  .about-page-title { font-size: 1.6rem; }
+  .about-hero-title {
+    font-size: 1.8rem;
+  }
+  .about-page-title {
+    font-size: 1.6rem;
+  }
 }

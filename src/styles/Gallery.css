@@ -1,5 +1,5 @@
 .gallery {
-  background-color: #FFF7EC;
+  background-color: #fff7ec;
   padding: 80px 60px;
   display: flex;
   flex-direction: column;
@@ -7,13 +7,15 @@
   gap: 40px;
 }
 
-.gallery-header { text-align: center; }
+.gallery-header {
+  text-align: center;
+}
 
 .gallery-label {
   font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #B71C1C;
+  color: #b71c1c;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
@@ -22,14 +24,14 @@
   font-family: var(--font-heading);
   font-size: 2.6rem;
   font-weight: 700;
-  color: #5C3A21;
+  color: #5c3a21;
   margin: 10px 0 12px;
 }
 
 .gallery-underline {
   width: 50px;
   height: 3px;
-  background-color: #D4A017;
+  background-color: #d4a017;
   margin: 0 auto;
 }
 
@@ -57,28 +59,42 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: #B71C1C !important;
+  color: #b71c1c !important;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #B71C1C !important;
+  background-color: #b71c1c !important;
 }
 
 /* ── Tablet (≤1024px) ── */
 @media (max-width: 1024px) {
-  .gallery { padding: 60px 32px; }
-  .gallery-slide { height: 200px; }
+  .gallery {
+    padding: 60px 32px;
+  }
+  .gallery-slide {
+    height: 200px;
+  }
 }
 
 /* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
-  .gallery { padding: 50px 24px; }
-  .gallery-title { font-size: 2rem; }
+  .gallery {
+    padding: 50px 24px;
+  }
+  .gallery-title {
+    font-size: 2rem;
+  }
 }
 
 /* ── Móvil pequeño (≤480px) ── */
 @media (max-width: 480px) {
-  .gallery { padding: 40px 16px; }
-  .gallery-title { font-size: 1.7rem; }
-  .gallery-slide { height: 170px; }
+  .gallery {
+    padding: 40px 16px;
+  }
+  .gallery-title {
+    font-size: 1.7rem;
+  }
+  .gallery-slide {
+    height: 170px;
+  }
 }

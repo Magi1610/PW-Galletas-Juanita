@@ -12,7 +12,9 @@ async function shot(viewport, name, scrollSelector) {
   await page.waitForTimeout(500)
   await page.screenshot({ path: `screenshots/${name}.png` })
   const errors = []
-  page.on('console', (msg) => { if (msg.type() === 'error') errors.push(msg.text()) })
+  page.on('console', (msg) => {
+    if (msg.type() === 'error') errors.push(msg.text())
+  })
   await page.close()
   return errors
 }
