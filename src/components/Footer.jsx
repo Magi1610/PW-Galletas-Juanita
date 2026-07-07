@@ -1,6 +1,11 @@
+import { Link } from 'react-router-dom'
 import '../styles/Footer.css'
+import { useGallery } from '../hooks/useGallery'
 
 function Footer() {
+  const { images: galleryImages } = useGallery()
+  const hasGallery = galleryImages.length > 0
+
   return (
     <footer className="footer">
 
@@ -19,12 +24,12 @@ function Footer() {
         <div className="footer-nav">
           <h4 className="footer-nav-title">NAVEGACIÓN</h4>
           <ul>
-            <li><a href="#inicio">Inicio</a></li>
-            <li><a href="#nosotros">Nosotros</a></li>
-            <li><a href="#productos">Productos</a></li>
-            <li><a href="#galeria">Galería</a></li>
-            <li><a href="#faq">FAQ</a></li>
-            <li><a href="#contacto">Contacto</a></li>
+            <li><Link to="/#inicio">Inicio</Link></li>
+            <li><Link to="/nosotros">Nosotros</Link></li>
+            <li><Link to="/productos">Productos</Link></li>
+            {hasGallery && <li><Link to="/#galeria">Galería</Link></li>}
+            <li><Link to="/#faq">FAQ</Link></li>
+            <li><Link to="/#contacto">Contacto</Link></li>
           </ul>
         </div>
 

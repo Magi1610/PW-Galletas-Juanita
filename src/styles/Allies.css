@@ -1,29 +1,27 @@
 .allies {
-  background-color: #3b1a08;
-  padding: 70px 0 60px;
+  background-color: #5C3A21;
+  padding: 70px 60px;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 40px;
-  overflow: hidden;
 }
 
 .allies-header {
   text-align: center;
-  padding: 0 24px;
 }
 
 .allies-label {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #c9a84c;
+  color: #D4A017;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 .allies-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 2.4rem;
   font-weight: 700;
   color: #fff;
@@ -33,93 +31,236 @@
 .allies-underline {
   width: 50px;
   height: 3px;
-  background-color: #c0392b;
+  background-color: #B71C1C;
   margin: 0 auto 16px;
 }
 
 .allies-subtitle {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
   color: rgba(255, 255, 255, 0.7);
 }
 
-/* Marquee */
-.allies-marquee-wrapper {
+/* Finder */
+.allies-finder {
   width: 100%;
-  overflow: hidden;
-  -webkit-mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-  mask-image: linear-gradient(to right, transparent, black 10%, black 90%, transparent);
-}
-
-.allies-marquee {
-  display: flex;
-  gap: 24px;
-  width: max-content;
-  animation: marquee 20s linear infinite;
-  padding: 10px 0;
-}
-
-.allies-marquee:hover {
-  animation-play-state: paused;
-}
-
-.ally-item {
+  max-width: 800px;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  gap: 10px;
-  background-color: rgba(255, 255, 255, 0.07);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 16px;
-  padding: 22px 36px;
-  min-width: 160px;
-  text-decoration: none;
-  transition: all 0.25s;
-  cursor: pointer;
+  gap: 30px;
 }
 
-.ally-item:hover {
-  background-color: rgba(192, 57, 43, 0.35);
-  border-color: #c0392b;
-  transform: translateY(-5px);
-  box-shadow: 0 8px 24px rgba(192, 57, 43, 0.3);
+.allies-selects {
+  display: flex;
+  gap: 20px;
+  flex-wrap: wrap;
 }
 
-.ally-emoji {
-  font-size: 2.2rem;
+.allies-select-wrapper {
+  flex: 1;
+  min-width: 200px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
 }
 
-.ally-name {
-  font-family: 'Poppins', sans-serif;
-  font-size: 0.9rem;
+.allies-select-label {
+  font-family: var(--font-body);
+  font-size: 0.8rem;
   font-weight: 600;
-  color: rgba(255, 255, 255, 0.85);
-  text-align: center;
-  white-space: nowrap;
+  color: #D4A017;
+  letter-spacing: 1px;
+  text-transform: uppercase;
 }
 
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
+.allies-select {
+  padding: 13px 18px;
+  border-radius: 10px;
+  border: 1px solid rgba(255,255,255,0.2);
+  background-color: rgba(255,255,255,0.08);
+  color: #fff;
+  font-family: var(--font-body);
+  font-size: 0.92rem;
+  cursor: pointer;
+  outline: none;
+  transition: all 0.2s;
+  appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8'%3E%3Cpath fill='%23ffffff' d='M6 8L0 0h12z'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 16px center;
+  padding-right: 40px;
 }
 
-@media (max-width: 768px) {
-  .allies-title { font-size: 1.8rem; }
+.allies-select:focus {
+  border-color: #B71C1C;
+  background-color: rgba(255,255,255,0.12);
 }
 
-.ally-logo-wrapper {
-  width: 120px;
-  height: 70px;
+.allies-select:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+.allies-select option {
+  background-color: #5C3A21;
+  color: #fff;
+}
+
+/* Resultados */
+.allies-results {
+  min-height: 160px;
   display: flex;
   align-items: center;
   justify-content: center;
 }
 
-.ally-logo {
-  max-width: 100%;
-  max-height: 100%;
-  object-fit: contain;
-  opacity: 0.85;
-  transition: opacity 0.2s;
+.allies-empty {
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 12px;
 }
 
+.allies-empty-icon {
+  font-size: 2.5rem;
+  opacity: 0.6;
+}
+
+.allies-empty p {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: rgba(255,255,255,0.5);
+}
+
+/* Tiendas */
+.allies-stores {
+  width: 100%;
+}
+
+.allies-results-title {
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: #D4A017;
+  font-weight: 600;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.allies-stores-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.ally-store-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background-color: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 12px;
+  padding: 16px 20px;
+  transition: all 0.2s;
+  animation: fadeIn 0.3s ease forwards;
+}
+
+.ally-store-card:hover {
+  background-color: rgba(183,28,28,0.25);
+  border-color: #B71C1C;
+  transform: translateX(5px);
+}
+
+.ally-store-icon {
+  font-size: 1.8rem;
+  flex-shrink: 0;
+}
+
+.ally-store-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.ally-store-info strong {
+  font-family: var(--font-body);
+  font-size: 0.95rem;
+  color: #fff;
+  font-weight: 600;
+}
+
+.ally-store-info span {
+  font-family: var(--font-body);
+  font-size: 0.82rem;
+  color: rgba(255,255,255,0.6);
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+/* Mapa */
+.allies-map-wrapper {
+  margin-top: 20px;
+  border-radius: 12px;
+  overflow: hidden;
+  border: 1px solid rgba(255,255,255,0.12);
+}
+
+.allies-map {
+  width: 100%;
+  height: 320px;
+}
+
+.allies-map-loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 320px;
+  background-color: rgba(255,255,255,0.05);
+  font-family: var(--font-body);
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.5);
+  text-align: center;
+  padding: 0 20px;
+}
+
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .allies { padding: 50px 32px; }
+}
+
+/* ── Móvil (≤768px) ── */
+@media (max-width: 768px) {
+  .allies { padding: 50px 24px; }
+  .allies-title { font-size: 1.8rem; }
+  .ally-store-card:hover { transform: none; }
+}
+
+/* ── Móvil pequeño (≤480px) ── */
+@media (max-width: 480px) {
+  .allies { padding: 40px 16px; }
+  .allies-title { font-size: 1.6rem; }
+  .allies-select-wrapper { min-width: unset; width: 100%; }
+}
+
+.allies-loading {
+  display: flex;
+  justify-content: center;
+  padding: 40px;
+}
+
+.allies-spinner {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255,255,255,0.2);
+  border-top-color: #fff;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}

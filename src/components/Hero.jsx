@@ -1,11 +1,12 @@
 import '../styles/Hero.css'
+import { Link } from 'react-router-dom'
 import { TypeAnimation } from 'react-type-animation'
 
 function Hero() {
   return (
     <section id="inicio" className="hero">
       <div className="hero-content">
-        <div className="hero-badge">⭐ Tradición desde 1990</div>
+        <div className="hero-badge">Tradición desde 1985</div>
         <h1 className="hero-title">
           Pruebe lo nuestro,{' '}
           <span className="hero-animated-text">
@@ -26,13 +27,13 @@ function Hero() {
           para acompañar tus mejores momentos.
         </p>
         <div className="hero-buttons">
-          <a href="#productos" className="hero-btn">Conoce nuestros productos →</a>
+          <Link to="/productos" className="hero-btn">Conoce nuestros productos →</Link>
           <a href="#contacto" className="hero-btn-outline">Contáctanos</a>
         </div>
 
         <div className="hero-stats">
           <div className="hero-stat">
-            <span className="hero-stat-number">+30</span>
+            <span className="hero-stat-number">+40</span>
             <span className="hero-stat-label">Años de experiencia</span>
           </div>
           <div className="hero-stat-divider"></div>

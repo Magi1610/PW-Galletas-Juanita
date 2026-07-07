@@ -1,29 +1,28 @@
-import Navbar from "./components/Navbar";
-import Hero from './components/Hero'
-import About from './components/About'
-import Products from './components/Products'
-import Gallery from './components/Gallery'
-import Faq from './components/Faq'
-import Contact from './components/Contact'
+import { BrowserRouter, Routes, Route } from 'react-router-dom'
+import Navbar from './components/Navbar'
 import Footer from './components/Footer'
-import Allies from './components/Allies'
 import WhatsAppButton from './components/WhatsAppButton'
+import ScrollToTop from "./components/ScrollToTop"
+import Home from './components/Home'
+import ProductsCatalog from './components/ProductsCatalog'
+import ProductDetail from './components/ProductDetail'
+import AboutPage from './components/AboutPage'
 
 function App() {
   return (
-    <>
+    <BrowserRouter>
+      <ScrollToTop />
       <Navbar />
-      <Hero />
-      <Products />
-      <About />
-      <Gallery />
-      <Allies />
-      <Faq />
-      <Contact />
-      <Footer />
       <WhatsAppButton />
-    </>
-  );
+      <Routes>
+        <Route path="/" element={<Home />} />
+        <Route path="/nosotros" element={<AboutPage />} />
+        <Route path="/productos" element={<ProductsCatalog />} />
+        <Route path="/productos/:slug" element={<ProductDetail />} />
+      </Routes>
+      <Footer />
+    </BrowserRouter>
+  )
 }
 
 export default App

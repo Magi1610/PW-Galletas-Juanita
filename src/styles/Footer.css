@@ -1,6 +1,6 @@
 .footer {
-  background-color: #3b1a08;
-  color: #f5e6d3;
+  background-color: #5C3A21;
+  color: #F5E9D6;
   padding: 60px 80px 0;
 }
 
@@ -21,16 +21,16 @@
 }
 
 .footer-logo {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 1.6rem;
   color: #fff;
   margin-bottom: 14px;
 }
 
 .footer-desc {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.85rem;
-  color: #c9a880;
+  color: #F5E9D6;
   line-height: 1.7;
   max-width: 280px;
 }
@@ -42,7 +42,7 @@
 }
 
 .footer-nav-title {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
   color: #fff;
@@ -60,9 +60,9 @@
 }
 
 .footer-nav ul li a {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.9rem;
-  color: #c9a880;
+  color: #F5E9D6;
   text-decoration: none;
   transition: color 0.2s;
 }
@@ -92,7 +92,7 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-weight: 700;
   font-size: 0.9rem;
   text-decoration: none;
@@ -100,7 +100,7 @@
 }
 
 .footer-social-btn:hover {
-  background-color: #c0392b;
+  background-color: #B71C1C;
 }
 
 /* Copyright */
@@ -112,23 +112,27 @@
 }
 
 .footer-bottom p {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.8rem;
-  color: #c9a880;
+  color: #F5E9D6;
   margin: 0;
 }
 
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .footer { padding: 60px 40px 0; }
+  .footer-body { gap: 36px; }
+}
+
+/* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
-  .footer {
-    padding: 40px 24px 0;
-  }
+  .footer { padding: 40px 24px 0; }
+  .footer-body { flex-direction: column; gap: 30px; }
+  .footer-desc { max-width: 100%; }
+}
 
-  .footer-body {
-    flex-direction: column;
-    gap: 30px;
-  }
-
-  .footer-desc {
-    max-width: 100%;
-  }
+/* ── Móvil pequeño (≤480px) ── */
+@media (max-width: 480px) {
+  .footer { padding: 40px 16px 0; }
+  .footer-logo { font-size: 1.3rem; }
 }

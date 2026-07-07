@@ -1,5 +1,12 @@
+/* ── Link wrapper ── */
+.product-card-link {
+  text-decoration: none;
+  color: inherit;
+}
+
+/* ── Sección contenedora ── */
 .products {
-  background-color: #fff9f2;
+  background-color: #FFF7EC;
   padding: 80px 60px;
   display: flex;
   flex-direction: column;
@@ -10,26 +17,26 @@
 .products-header { text-align: center; }
 
 .products-label {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #c0392b;
+  color: #B71C1C;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 .products-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 2.6rem;
   font-weight: 700;
-  color: #3b1a08;
+  color: #5C3A21;
   margin: 10px 0 12px;
 }
 
 .products-underline {
   width: 50px;
   height: 3px;
-  background-color: #c9a84c;
+  background-color: #D4A017;
   margin: 0 auto;
 }
 
@@ -39,43 +46,54 @@
   padding-bottom: 40px;
 }
 
+/* ── Card ── */
 .product-card {
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 14px;
   cursor: pointer;
-}
-
-.product-img-wrapper {
-  width: 180px;
-  height: 180px;
-  border-radius: 50%;
+  background-color: #fff;
+  border-radius: 20px;
   overflow: hidden;
-  position: relative;
-  border: 4px solid #f0e6d3;
-  transition: border-color 0.3s;
+  box-shadow: 0 4px 20px rgba(0,0,0,0.07);
+  transition: transform 0.25s, box-shadow 0.25s;
 }
 
-.product-img-wrapper:hover {
-  border-color: #c0392b;
+.product-card:hover {
+  transform: translateY(-8px);
+  box-shadow: 0 12px 35px rgba(183,28,28,0.15);
+}
+
+/* ── Imagen ── */
+.product-img-wrapper {
+  width: 100%;
+  height: 200px;
+  background: #f7f7f7;
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
 }
 
 .product-img-wrapper img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
-  transition: transform 0.3s;
+  object-fit: contain;
+  transition: transform 0.35s;
 }
 
 .product-card:hover .product-img-wrapper img {
-  transform: scale(1.08);
+  transform: scale(1.1) rotate(-2deg);
 }
 
+/* ── Overlay ── */
 .product-overlay {
   position: absolute;
   inset: 0;
-  background: rgba(192, 57, 43, 0.7);
+  background: rgba(192, 57, 43, 0.75);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -87,23 +105,46 @@
   opacity: 1;
 }
 
-.product-emoji { font-size: 2.5rem; }
-
-.product-name {
-  font-family: 'Poppins', sans-serif;
-  font-size: 1rem;
+.product-overlay-text {
+  color: white;
+  font-family: var(--font-body);
   font-weight: 600;
-  color: #3b1a08;
-  margin: 0;
+  font-size: 0.9rem;
+  letter-spacing: 1px;       /* del primer bloque */
+  text-transform: uppercase; /* del primer bloque */
 }
 
+/* ── Texto de la card ── */
+.product-name {
+  font-family: var(--font-heading); /* primer bloque */
+  font-size: 1.05rem;                     /* primer bloque */
+  font-weight: 700;                       /* primer bloque */
+  color: #5C3A21;
+  margin: 0 0 14px;
+  text-align: center;
+  padding: 0 12px;
+}
+
+.product-badge {
+  display: inline-block;
+  background-color: #B71C1C;
+  color: white;
+  font-family: var(--font-body);
+  font-size: 0.72rem;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  margin-bottom: 14px; /* primer bloque; el segundo usaba margin-top: 4px */
+}
+
+/* ── Botón ver más ── */
 .products-btn {
   display: inline-block;
-  border: 2px solid #c0392b;
-  color: #c0392b;
+  border: 2px solid #B71C1C;
+  color: #B71C1C;
   padding: 12px 30px;
   border-radius: 999px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
@@ -111,21 +152,57 @@
 }
 
 .products-btn:hover {
-  background-color: #c0392b;
+  background-color: #B71C1C;
   color: white;
   transform: translateY(-2px);
 }
 
+/* ── Swiper ── */
 .swiper-button-next,
 .swiper-button-prev {
-  color: #c0392b !important;
+  color: #B71C1C !important;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #c0392b !important;
+  background-color: #B71C1C !important;
+}
+
+/* ── Loading ── */
+.products-loading {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 16px;
+  padding: 40px;
+  color: #8B4513;
+  font-family: var(--font-body);
+}
+
+.products-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid #F5E9D6;
+  border-top-color: #B71C1C;
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Responsive ── */
+@media (max-width: 1024px) {
+  .products { padding: 60px 32px; }
 }
 
 @media (max-width: 768px) {
   .products { padding: 50px 24px; }
   .products-title { font-size: 2rem; }
+}
+
+@media (max-width: 480px) {
+  .products { padding: 40px 16px; }
+  .products-title { font-size: 1.7rem; }
+  .product-img-wrapper { height: 160px; }
 }

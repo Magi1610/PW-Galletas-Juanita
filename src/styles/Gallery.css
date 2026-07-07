@@ -1,5 +1,5 @@
 .gallery {
-  background-color: #fdf6ee;
+  background-color: #FFF7EC;
   padding: 80px 60px;
   display: flex;
   flex-direction: column;
@@ -10,26 +10,26 @@
 .gallery-header { text-align: center; }
 
 .gallery-label {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #c0392b;
+  color: #B71C1C;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 .gallery-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 2.6rem;
   font-weight: 700;
-  color: #3b1a08;
+  color: #5C3A21;
   margin: 10px 0 12px;
 }
 
 .gallery-underline {
   width: 50px;
   height: 3px;
-  background-color: #c9a84c;
+  background-color: #D4A017;
   margin: 0 auto;
 }
 
@@ -57,14 +57,28 @@
 
 .swiper-button-next,
 .swiper-button-prev {
-  color: #c0392b !important;
+  color: #B71C1C !important;
 }
 
 .swiper-pagination-bullet-active {
-  background-color: #c0392b !important;
+  background-color: #B71C1C !important;
 }
 
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .gallery { padding: 60px 32px; }
+  .gallery-slide { height: 200px; }
+}
+
+/* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
   .gallery { padding: 50px 24px; }
   .gallery-title { font-size: 2rem; }
+}
+
+/* ── Móvil pequeño (≤480px) ── */
+@media (max-width: 480px) {
+  .gallery { padding: 40px 16px; }
+  .gallery-title { font-size: 1.7rem; }
+  .gallery-slide { height: 170px; }
 }

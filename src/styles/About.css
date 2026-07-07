@@ -1,5 +1,5 @@
 .about {
-  background-color: #fdf6ee;
+  background-color: #FFF7EC;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -28,19 +28,19 @@
 }
 
 .about-label {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.75rem;
   font-weight: 600;
-  color: #c0392b;
+  color: #B71C1C;
   letter-spacing: 2px;
   text-transform: uppercase;
 }
 
 .about-title {
-  font-family: 'Playfair Display', serif;
+  font-family: var(--font-heading);
   font-size: 2.8rem;
   font-weight: 700;
-  color: #3b1a08;
+  color: #5C3A21;
   line-height: 1.2;
   margin: 10px 0 12px;
 }
@@ -48,25 +48,25 @@
 .about-underline {
   width: 50px;
   height: 3px;
-  background-color: #c9a84c;
+  background-color: #D4A017;
   margin-bottom: 20px;
 }
 
 .about-text {
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-size: 0.95rem;
-  color: #7a5c3e;
+  color: #8B4513;
   line-height: 1.8;
   margin-bottom: 32px;
 }
 
 .about-btn {
   display: inline-block;
-  background-color: #c0392b;
+  background-color: #B71C1C;
   color: white;
   padding: 13px 30px;
   border-radius: 999px;
-  font-family: 'Poppins', sans-serif;
+  font-family: var(--font-body);
   font-weight: 600;
   font-size: 0.9rem;
   text-decoration: none;
@@ -77,6 +77,12 @@
   opacity: 0.88;
 }
 
+/* ── Tablet (≤1024px) ── */
+@media (max-width: 1024px) {
+  .about { padding: 60px 40px; gap: 40px; }
+}
+
+/* ── Móvil (≤768px) ── */
 @media (max-width: 768px) {
   .about {
     flex-direction: column;
@@ -84,15 +90,17 @@
     text-align: center;
   }
 
-  .about-title {
-    font-size: 2rem;
-  }
+  .about-title { font-size: 2rem; }
 
-  .about-underline {
-    margin: 0 auto 20px;
-  }
+  .about-underline { margin: 0 auto 20px; }
 
-  .about-image img {
-    height: 280px;
-  }
+  .about-image img { height: 280px; }
+}
+
+/* ── Móvil pequeño (≤480px) ── */
+@media (max-width: 480px) {
+  .about { padding: 40px 16px; }
+  .about-title { font-size: 1.7rem; }
+  .about-text { font-size: 0.88rem; }
+  .about-btn { display: block; text-align: center; }
 }
