@@ -10,7 +10,7 @@ function Faq() {
   useEffect(() => {
     async function load() {
       try {
-        const data = await apiFetch('/api/faqs/')
+        const data = await apiFetch('/api/catalog/faqs/')
         setFaqs(data.results ?? data)
       } catch {
         // se queda vacío, la sección no se muestra

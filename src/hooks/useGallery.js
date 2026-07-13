@@ -11,7 +11,7 @@ export function useGallery() {
       setLoading(true)
       setError(null)
       try {
-        const data = await apiFetch('/api/galeria/')
+        const data = await apiFetch('/api/catalog/gallery/')
         setImages(data.results ?? data)
       } catch (e) {
         setError(e.message)

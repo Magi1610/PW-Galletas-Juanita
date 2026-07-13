@@ -15,44 +15,6 @@ L.Icon.Default.mergeOptions({
   shadowUrl: markerShadow,
 })
 
-const GEOCODE_CACHE_KEY = 'gj-geocode-cache'
-
-function loadGeocodeCache() {
-  try {
-    return new Map(Object.entries(JSON.parse(localStorage.getItem(GEOCODE_CACHE_KEY) || '{}')))
-  } catch {
-    return new Map()
-  }
-}
-
-function saveGeocodeCache(cache) {
-  try {
-    localStorage.setItem(GEOCODE_CACHE_KEY, JSON.stringify(Object.fromEntries(cache)))
-  } catch {
-    // almacenamiento no disponible, se ignora
-  }
-}
-
-const geocodeCache = loadGeocodeCache()
-
-async function geocodeAddress(query) {
-  if (geocodeCache.has(query)) {
-    return { coords: geocodeCache.get(query), fromCache: true }
-  }
-  try {
-    const res = await fetch(
-      `https://nominatim.openstreetmap.org/search?format=json&limit=1&q=${encodeURIComponent(query)}`,
-    )
-    const data = await res.json()
-    const coords = data[0] ? { lat: parseFloat(data[0].lat), lng: parseFloat(data[0].lon) } : null
-    geocodeCache.set(query, coords)
-    saveGeocodeCache(geocodeCache)
-    return { coords, fromCache: false }
-  } catch {
-    return { coords: null, fromCache: false }
-  }
-}
-
 function FitBounds({ points }) {
   const map = useMap()
 
@@ -76,13 +38,11 @@ function Allies() {
   const [loading, setLoading] = useState(true)
   const [selectedState, setSelectedState] = useState('')
   const [selectedCity, setSelectedCity] = useState('')
-  const [storeLocations, setStoreLocations] = useState([])
-  const [geoLoading, setGeoLoading] = useState(false)
 
   useEffect(() => {
     async function load() {
       try {
-        const data = await apiFetch('/api/retailers/')
+        const data = await apiFetch('/api/catalog/retailers/')
         setAllData(data.results ?? data)
       } catch {
         // se queda vacío
@@ -111,42 +71,13 @@ function Allies() {
     [allData, selectedState, selectedCity],
   )
 
-  useEffect(() => {
-    let cancelled = false
-
-    async function locateStores() {
-      if (stores.length === 0) {
-        setStoreLocations([])
-        return
-      }
-
-      setGeoLoading(true)
-      const results = []
-
-      for (const store of stores) {
-        if (store.lat != null && store.lng != null) {
-          results.push({ ...store, lat: Number(store.lat), lng: Number(store.lng) })
-          continue
-        }
-
-        const query = `${store.address}, ${store.municipality}, ${store.state}, México`
-        const { coords, fromCache } = await geocodeAddress(query)
-        if (cancelled) return
-        if (coords) results.push({ ...store, lat: coords.lat, lng: coords.lng })
-        if (!fromCache) await new Promise((r) => setTimeout(r, 350))
-      }
-
-      if (!cancelled) {
-        setStoreLocations(results)
-        setGeoLoading(false)
-      }
-    }
-
-    locateStores()
-    return () => {
-      cancelled = true
-    }
-  }, [stores])
+  const storeLocations = useMemo(
+    () =>
+      stores
+        .filter((store) => store.lat != null && store.lng != null)
+        .map((store) => ({ ...store, lat: Number(store.lat), lng: Number(store.lng) })),
+    [stores],
+  )
 
   const handleStateChange = (e) => {
     setSelectedState(e.target.value)
@@ -157,7 +88,7 @@ function Allies() {
     <section id="aliados" className="allies">
       <div className="allies-header">
         <span className="allies-label">ALIADOS COMERCIALES</span>
-        <h2 className="allies-title">Encuentra tu local más cercano</h2>
+        <h2 className="allies-title">Encuentra tu tienda más cercana</h2>
         <div className="allies-underline"></div>
         <p className="allies-subtitle">
           Selecciona tu estado y municipio para encontrar el punto de venta mas cercano.
@@ -226,15 +157,31 @@ function Allies() {
                   {stores.length} punto{stores.length > 1 ? 's' : ''} de venta en {selectedCity}
                 </p>
                 <div className="allies-stores-grid">
-                  {stores.map((store) => (
-                    <div key={store.id} className="ally-store-card">
-                      <span className="ally-store-icon">🏪</span>
-                      <div className="ally-store-info">
-                        <strong>{store.name}</strong>
-                        <span>{store.address}</span>
+                  {stores.map((store) => {
+                    const hasCoords = store.lat != null && store.lng != null
+                    const logoUrl = store.logo_url ?? store.brand?.logo_url
+                    const logoAlt = store.logo_url ? store.name : store.brand?.name
+                    return (
+                      <div key={store.id} className="ally-store-card">
+                        {logoUrl ? (
+                          <span className="ally-store-logo-wrap">
+                            <img className="ally-store-logo" src={logoUrl} alt={logoAlt} />
+                          </span>
+                        ) : (
+                          <span className="ally-store-icon">🏪</span>
+                        )}
+                        <div className="ally-store-info">
+                          <strong>{store.name}</strong>
+                          <span>{store.address}</span>
+                          {!hasCoords && (
+                            <span className="ally-store-no-location">
+                              Ubicación no disponible en el mapa
+                            </span>
+                          )}
+                        </div>
                       </div>
-                    </div>
-                  ))}
+                    )
+                  })}
                 </div>
 
                 <div className="allies-map-wrapper">
@@ -262,9 +209,7 @@ function Allies() {
                     </MapContainer>
                   ) : (
                     <div className="allies-map-loading">
-                      {geoLoading
-                        ? 'Ubicando los locales en el mapa...'
-                        : 'No pudimos ubicar estos locales en el mapa.'}
+                      Ninguna tienda de este municipio tiene ubicación registrada aún.
                     </div>
                   )}
                 </div>

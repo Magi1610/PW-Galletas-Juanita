@@ -11,7 +11,7 @@ export function useDepartamentos() {
       setLoading(true)
       setError(null)
       try {
-        const data = await apiFetch('/api/departments/')
+        const data = await apiFetch('/api/catalog/departments/')
         setDepartamentos(data.results ?? data)
       } catch (e) {
         setError(e.message)

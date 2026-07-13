@@ -21,7 +21,7 @@ describe('useDepartamentos', () => {
 
     await waitFor(() => expect(result.current.loading).toBe(false))
 
-    expect(apiFetch).toHaveBeenCalledWith('/api/departments/')
+    expect(apiFetch).toHaveBeenCalledWith('/api/catalog/departments/')
     expect(result.current.departamentos).toEqual([{ id: 1, nombre: 'Guanajuato' }])
     expect(result.current.error).toBeNull()
   })
