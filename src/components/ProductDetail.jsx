@@ -64,7 +64,7 @@ function ProductDetail() {
   const accent = CATEGORY_COLORS[categoryLabel] ?? DEFAULT_COLOR
   const sizeOptions = [
     { id: product.id, slug: product.slug, name: product.name },
-    ...(product.variantes ?? []),
+    ...(product.variants ?? []),
   ]
 
   return (
@@ -72,7 +72,7 @@ function ProductDetail() {
       <nav className="detail-breadcrumb">
         <button onClick={() => navigate('/productos')}>Productos</button>
         <span>/</span>
-        <button onClick={() => navigate('/productos')}>{categoryLabel}</button>
+        <button onClick={() => navigate('/productos?cat=' + category?.id)}>{categoryLabel}</button>
         <span>/</span>
         <span>{product.name}</span>
       </nav>
