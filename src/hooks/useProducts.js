@@ -15,8 +15,8 @@ export function useProducts() {
       try {
         const [prods, cats, pres] = await Promise.all([
           apiFetch('/api/store-mgmt/products/'),
-          apiFetch('/api/categories/'),
-          apiFetch('/api/presentations/'),
+          apiFetch('/api/catalog/categories/'),
+          apiFetch('/api/catalog/presentations/'),
         ])
         setProducts(prods.results ?? prods)
         setCategories([{ id: 'all', label: 'Todas' }, ...(cats.results ?? cats)])

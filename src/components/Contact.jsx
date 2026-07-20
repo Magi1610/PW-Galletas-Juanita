@@ -38,7 +38,7 @@ function Contact() {
     setStatus('sending')
     setFieldErrors({})
     try {
-      await apiFetch(`/api/departments/${form.departamento_id}/contact/`, {
+      await apiFetch(`/api/catalog/departments/${form.departamento_id}/contact/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({

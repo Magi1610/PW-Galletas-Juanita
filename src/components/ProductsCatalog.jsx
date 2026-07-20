@@ -1,18 +1,24 @@
 ﻿import { useState, useMemo } from 'react'
-import { Link } from 'react-router-dom'
+import { Link, useSearchParams } from 'react-router-dom'
 import { useProducts } from '../hooks/useProducts'
 import '../styles/Catalog.css'
 
 function ProductsCatalog() {
   const { products, categories, presentaciones, loading, error } = useProducts()
-  const [selectedCategory, setSelectedCategory] = useState(null)
+  const [searchParams, setSearchParams] = useSearchParams()
   const [activePresentacion, setActivePresentacion] = useState('all')
   const [search, setSearch] = useState('')
+
+  const categoryParam = searchParams.get('cat')
+  const selectedCategory =
+    categoryParam === 'all' ? 'all' : categoryParam ? Number(categoryParam) : null
 
   const activeCategory = selectedCategory ?? categories[1]?.id ?? ''
 
   function handleCategoryChange(id) {
-    setSelectedCategory(id)
+    const next = new URLSearchParams(searchParams)
+    next.set('cat', String(id))
+    setSearchParams(next, { replace: true })
     setActivePresentacion('all')
   }
 

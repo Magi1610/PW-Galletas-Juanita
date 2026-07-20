@@ -1,4 +1,5 @@
 import Allies from './Allies'
+import foundersPhoto from '../assets/images/reyes y juanita.jpeg'
 import '../styles/AboutPage.css'
 
 function AboutPage() {
@@ -17,8 +18,8 @@ function AboutPage() {
       <section className="about-history">
         <div className="about-history-image">
           <img
-            src="https://images.unsplash.com/photo-1586444248902-2f64eddc13df?w=700&q=80"
-            alt="Elaboración artesanal de galletas"
+            src={foundersPhoto}
+            alt="Sra. Juana Rangel y Sr. Reyes Barrera, fundadores de Galletas Juanita"
           />
         </div>
         <div className="about-history-content">

@@ -173,14 +173,48 @@
 }
 
 .ally-store-icon {
-  font-size: 1.8rem;
+  width: 64px;
+  height: 64px;
   flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+  border-radius: 12px;
+  background-color: rgba(255, 255, 255, 0.9);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+.ally-store-logo-wrap {
+  width: 64px;
+  height: 64px;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.ally-store-logo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 96px;
+  height: 96px;
+  object-fit: contain;
+  z-index: 1;
 }
 
 .ally-store-info {
   display: flex;
   flex-direction: column;
   gap: 4px;
+  margin-left: 12px;
+}
+
+.ally-store-no-location {
+  font-family: var(--font-body);
+  font-size: 0.75rem;
+  color: #d4a017;
+  font-style: italic;
 }
 
 .ally-store-info strong {
@@ -264,6 +298,21 @@
   .allies-select-wrapper {
     min-width: unset;
     width: 100%;
+  }
+  .ally-store-icon {
+    width: 48px;
+    height: 48px;
+  }
+  .ally-store-logo-wrap {
+    width: 48px;
+    height: 48px;
+  }
+  .ally-store-logo {
+    width: 72px;
+    height: 72px;
+  }
+  .ally-store-icon {
+    font-size: 1.7rem;
   }
 }
 
