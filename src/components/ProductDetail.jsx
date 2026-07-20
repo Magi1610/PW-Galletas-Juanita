@@ -25,6 +25,7 @@ function ProductDetail() {
   const navigate = useNavigate()
   const [product, setProduct] = useState(null)
   const [loading, setLoading] = useState(true)
+  const [selectedImageIndex, setSelectedImageIndex] = useState(0)
 
   useEffect(() => {
     async function load() {
@@ -32,6 +33,7 @@ function ProductDetail() {
       try {
         const data = await apiFetch(`/api/store-mgmt/products/${slug}/`)
         setProduct(data)
+        setSelectedImageIndex(0)
       } catch {
         setProduct(null)
       } finally {
@@ -66,6 +68,10 @@ function ProductDetail() {
     { id: product.id, slug: product.slug, name: product.name },
     ...(product.variantes ?? []),
   ]
+  const galleryImages = [product.img, ...(product.images ?? []).map((image) => image.img)].filter(
+    Boolean,
+  )
+  const mainImage = galleryImages[selectedImageIndex] ?? galleryImages[0]
 
   return (
     <div className="detail-page" style={{ '--accent': accent }}>
@@ -84,8 +90,23 @@ function ProductDetail() {
       <div className="detail-body">
         <div className="detail-gallery">
           <div className="detail-main-img">
-            {product.img && <img src={product.img} alt={product.name} />}
+            {mainImage && <img src={mainImage} alt={product.name} />}
           </div>
+          {galleryImages.length > 1 && (
+            <div className="detail-thumbs">
+              {galleryImages.map((src, index) => (
+                <button
+                  key={src + index}
+                  type="button"
+                  className={'detail-thumb' + (index === selectedImageIndex ? ' active' : '')}
+                  onClick={() => setSelectedImageIndex(index)}
+                  aria-label={`Ver imagen ${index + 1} de ${product.name}`}
+                >
+                  <img src={src} alt="" />
+                </button>
+              ))}
+            </div>
+          )}
         </div>
 
         <div className="detail-info">
