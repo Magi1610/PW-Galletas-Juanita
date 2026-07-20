@@ -1,6 +1,6 @@
 ﻿import '../styles/WhatsAppButton.css'
 
-const PHONE = '5590748644'
+const PHONE = '525648108022'
 const MESSAGE = 'Hola! Me interesa hacer un pedido de Galletas Juanita'
 
 function WhatsAppButton() {

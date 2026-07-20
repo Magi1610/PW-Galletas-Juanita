@@ -95,7 +95,7 @@ function Contact() {
           </div>
           <div className="contact-info-item">
             <span className="contact-icon">📞</span>
-            <p>55-90-74-88-44</p>
+            <p>+52 56 4810 8022</p>
           </div>
           <div className="contact-info-item">
             <span className="contact-icon">✉️</span>

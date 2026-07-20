@@ -16,7 +16,11 @@ function Navbar() {
   const handleScroll = (sectionId, path = '/') => {
     close()
     if (location.pathname === path) {
-      document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+      if (sectionId === 'inicio') {
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+      } else {
+        document.getElementById(sectionId)?.scrollIntoView({ behavior: 'smooth' })
+      }
     } else {
       navigate(`${path}#${sectionId}`)
     }
@@ -26,9 +30,13 @@ function Navbar() {
     <>
       <nav className="navbar">
         <div className="navbar-logo">
-          <Link to="/">
+          <button
+            className="navbar-logo-btn"
+            onClick={() => handleScroll('inicio')}
+            aria-label="Ir al inicio"
+          >
             <img src={logo} alt="Galletas Juanita" className="navbar-logo-img" />
-          </Link>
+          </button>
         </div>
 
         <ul className="navbar-links">
@@ -92,9 +100,13 @@ function Navbar() {
         </button>
 
         <div className="navbar-drawer-logo">
-          <Link to="/" onClick={close}>
+          <button
+            className="navbar-logo-btn"
+            onClick={() => handleScroll('inicio')}
+            aria-label="Ir al inicio"
+          >
             <img src={logo} alt="Galletas Juanita" className="navbar-drawer-logo-img" />
-          </Link>
+          </button>
         </div>
 
         <ul className="navbar-drawer-links">

@@ -5,7 +5,7 @@ function ScrollToTop() {
   const { pathname, hash } = useLocation()
 
   useEffect(() => {
-    if (hash) {
+    if (hash && hash !== '#inicio') {
       const el = document.getElementById(hash.slice(1))
       if (el) {
         el.scrollIntoView({ behavior: 'smooth' })
