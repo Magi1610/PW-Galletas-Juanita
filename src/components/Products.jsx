@@ -44,7 +44,7 @@ function Products() {
                 <Link to={'/productos/' + product.slug} className="product-card-link">
                   <div className="product-card">
                     <div className="product-img-wrapper">
-                      <img src={product.img} alt={product.name} />
+                      <img src={product.images?.[0]?.img} alt={product.name} />
                       <div className="product-overlay">
                         <span className="product-overlay-text">Ver producto</span>
                       </div>

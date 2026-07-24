@@ -127,7 +127,7 @@ function ProductsCatalog() {
           {filtered.map((product) => (
             <div key={product.id} className="catalog-card">
               <div className="catalog-card-img">
-                <img src={product.img} alt={product.name} />
+                <img src={product.images?.[0]?.img} alt={product.name} />
                 {product.badge && <span className="catalog-badge">{product.badge}</span>}
               </div>
               <div className="catalog-card-body">

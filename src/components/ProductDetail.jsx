@@ -68,9 +68,7 @@ function ProductDetail() {
     { id: product.id, slug: product.slug, name: product.name },
     ...(product.variants ?? []),
   ]
-  const galleryImages = [product.img, ...(product.images ?? []).map((image) => image.img)].filter(
-    Boolean,
-  )
+  const galleryImages = (product.images ?? []).map((image) => image.img).filter(Boolean)
   const mainImage = galleryImages[selectedImageIndex] ?? galleryImages[0]
 
   return (
