@@ -17,10 +17,10 @@ describe('useProducts', () => {
       if (path === '/api/store-mgmt/products/') {
         return Promise.resolve({ results: [{ id: 1, name: 'Galleta de nuez' }] })
       }
-      if (path === '/api/categories/') {
+      if (path === '/api/catalog/categories/') {
         return Promise.resolve({ results: [{ id: 'nuez', label: 'Nuez' }] })
       }
-      if (path === '/api/presentations/') {
+      if (path === '/api/catalog/presentations/') {
         return Promise.resolve({ results: [{ id: 'chica', label: 'Chica' }] })
       }
       throw new Error(`unexpected path: ${path}`)

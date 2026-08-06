@@ -84,7 +84,7 @@ describe('Contact', () => {
     )
 
     expect(apiFetch).toHaveBeenCalledWith(
-      '/api/departments/1/contact/',
+      '/api/catalog/departments/1/contact/',
       expect.objectContaining({
         method: 'POST',
         body: JSON.stringify({

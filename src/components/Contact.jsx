@@ -38,7 +38,7 @@ function Contact() {
     setStatus('sending')
     setFieldErrors({})
     try {
-      await apiFetch(`/api/departments/${form.departamento_id}/contact/`, {
+      await apiFetch(`/api/catalog/departments/${form.departamento_id}/contact/`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -95,7 +95,7 @@ function Contact() {
           </div>
           <div className="contact-info-item">
             <span className="contact-icon">📞</span>
-            <p>55-90-74-88-44</p>
+            <p>+52 56 4810 8022</p>
           </div>
           <div className="contact-info-item">
             <span className="contact-icon">✉️</span>

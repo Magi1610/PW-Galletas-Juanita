@@ -21,7 +21,7 @@ describe('useGallery', () => {
 
     await waitFor(() => expect(result.current.loading).toBe(false))
 
-    expect(apiFetch).toHaveBeenCalledWith('/api/galeria/')
+    expect(apiFetch).toHaveBeenCalledWith('/api/catalog/gallery/')
     expect(result.current.images).toEqual([{ id: 1, image: 'foto.jpg' }])
     expect(result.current.error).toBeNull()
   })

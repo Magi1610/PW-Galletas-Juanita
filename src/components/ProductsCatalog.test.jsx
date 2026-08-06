@@ -11,8 +11,8 @@ vi.mock('../hooks/useProducts', () => ({
 
 const categories = [
   { id: 'all', label: 'Todas' },
-  { id: 'nuez', label: 'Nuez' },
-  { id: 'chocolate', label: 'Chocolate' },
+  { id: 1, label: 'Nuez' },
+  { id: 2, label: 'Chocolate' },
 ]
 
 const presentaciones = [
@@ -25,21 +25,21 @@ const products = [
     id: 1,
     name: 'Galleta de nuez chica',
     slug: 'nuez-chica',
-    category: { id: 'nuez' },
+    category: { id: 1 },
     presentation: { id: 'chica' },
   },
   {
     id: 2,
     name: 'Galleta de nuez grande',
     slug: 'nuez-grande',
-    category: { id: 'nuez' },
+    category: { id: 1 },
     presentation: { id: 'grande' },
   },
   {
     id: 3,
     name: 'Galleta de chocolate',
     slug: 'chocolate',
-    category: { id: 'chocolate' },
+    category: { id: 2 },
     presentation: { id: 'chica' },
   },
 ]
@@ -83,7 +83,7 @@ describe('ProductsCatalog', () => {
     expect(screen.getByText(/Error al cargar productos/)).toBeInTheDocument()
   })
 
-  it('defaults to the first real category and only shows products from it', () => {
+  it('defaults to the first real category (from the URL query param default) and only shows its products', () => {
     setup()
 
     expect(screen.getByText('Galleta de nuez chica')).toBeInTheDocument()
@@ -101,7 +101,7 @@ describe('ProductsCatalog', () => {
     expect(screen.queryByText('Galleta de nuez grande')).not.toBeInTheDocument()
   })
 
-  it('resets the presentacion filter when switching category', async () => {
+  it('switches category via the URL search param and resets the presentacion filter', async () => {
     const user = userEvent.setup()
     setup()
 
