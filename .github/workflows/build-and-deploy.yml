@@ -1,4 +1,4 @@
-name: Push Docker Image
+name: Build and Deploy
 
 on:
   workflow_dispatch:
@@ -36,3 +36,28 @@ jobs:
         run: |
           docker push '${{ vars.DOCKER_USER }}/${{ vars.DOCKER_IMAGE }}:'"$TAG"
           docker push '${{ vars.DOCKER_USER }}/${{ vars.DOCKER_IMAGE }}:latest'
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Deploy application via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.VPS_HOST }}
+          username: ${{ secrets.VPS_USER }}
+          key: ${{ secrets.VPS_SSH_KEY }}
+
+          script: |
+            docker pull ${{ vars.DOCKER_USER }}/${{ vars.DOCKER_IMAGE }}:latest
+
+            docker stop ${{ vars.CONTAINER_NAME }} || true
+            docker rm ${{ vars.CONTAINER_NAME }} || true
+
+            docker run -d \
+              --name ${{ vars.CONTAINER_NAME }} \
+              --restart always \
+              -p ${{ vars.VPS_PORT }}:3000 \
+              ${{ vars.DOCKER_USER }}/${{ vars.DOCKER_IMAGE }}:latest
+
+            docker image prune -f
